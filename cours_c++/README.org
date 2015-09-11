@@ -1,0 +1,6 @@
+* Cours de C++:
+Voir [[http://www.bruno-garcia.net/www/Cours/][Cours de Bruno Garcia]].
+
+* Tâches:
+** TODO : Finir le livre du site du zero
+ 
