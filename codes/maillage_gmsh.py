@@ -18,7 +18,6 @@ if len(sys.argv) < 2 :
 
 else :
     keywords = "$Nodes\n"
-    keywords2 = "$EndNodes"
     f = open(sys.argv[1], 'r')
     ligne = ""
 
@@ -39,7 +38,21 @@ else :
         i+=1
 
     #Maintenant on récupère les noeuds situé à l'insertion du faisceau de Bachmann
-    
-    
+    noeuds_FB = nodes[(nodes[:,1]>=0.3) & (nodes[:,1]<=0.5) & (nodes[:,2]==0.5),:]
+
+    # On va maintenant chercher les éléments qui ont un coté
+    # situé sur l'interface
+
+    keywords = "$Elements\n" 
+    while ligne != keywords:
+        ligne = f.readline()
+
+    nbrElements = int(f.readline())
+    Elements = np.zeros((nbrElements, 8))
+
+    for i in range(nbrElements):
+        l = f.readline()
+        Elements[i,:] = map(float, l.split())
+        i+=1
         
     f.closed
