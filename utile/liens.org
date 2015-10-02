@@ -1,0 +1,2 @@
+* Liens utiles
+[[https://books.google.fr/books?id=KYwK-MkhzYoC&pg=PA234&lpg=PA234&dq=disconnected+boundary&source=bl&ots=4M2zlsDqwj&sig=gLDNmifK5QEM7HRTI4WZxb-GGjU&hl=fr&sa=X&ved=0CGYQ6AEwDGoVChMIt8O2_cihyAIVRCQeCh0a-wS-#v=onepage&q=disconnected%20boundary&f=false][Sobolev Spaces]]
