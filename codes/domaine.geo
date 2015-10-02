@@ -10,6 +10,10 @@ Line(3) = {3, 4};
 Line(4) = {4, 1};
 Line(5) = {5, 6};
 Line Loop(6) = {4, 1, 2, 3};
-Plane Surface(7) = {6};
 
+Plane Surface(7) = {6};
 Line{5} In Surface{7};
+
+Physical Surface(1) = {7};
+
+
