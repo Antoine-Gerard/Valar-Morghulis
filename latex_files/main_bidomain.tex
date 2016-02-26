@@ -1,0 +1,40 @@
+\documentclass[a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{amsthm}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{fullwidth}
+
+\newtheorem{mydef}{Définition}[chapter]
+\newtheorem*{Rem}{Remarque}
+\newtheorem{lemme}{Lemme}[chapter]
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+%\DeclareMathOperator{\exp}{exp} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\begin{document}
+
+\input{FirsPart_AABidomain.tex}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

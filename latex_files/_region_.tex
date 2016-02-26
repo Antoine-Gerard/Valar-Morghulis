@@ -1,0 +1,51 @@
+\message{ !name(main_bidomain.tex)}\documentclass[a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{amsthm}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{fullwidth}
+
+\newtheorem{mydef}{Définition}[chapter]
+\newtheorem*{Rem}{Remarque}
+\newtheorem{lemme}{Lemme}[chapter]
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+%\DeclareMathOperator{\exp}{exp} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\begin{document}
+
+\message{ !name(FirsPart_AABidomain.tex) !offset(-33) }
+\section{Analyse asymptotique bidomaine: Coeur + Torse}
+
+On considère une pièce de tissu cardiaque idéalisée $\Omega$ ayant une épaisseur $h>0$. On définit $\mathbb{H}\ = \omega \times (0,h) \subset \mathbb{R}^3$, où $\omega$ est un ensemble ouvert de $\mathbb{R}^2$. De plus nous faisons l'hypothèse que $\Omega \subset \mathcal{E}$ et que $\mathbb{T} = \mathcal{E} - \mathbb{\overline{H}}$  
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main_bidomain"
+%%% End:
+
+\message{ !name(main_bidomain.tex) !offset(-11) }
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
