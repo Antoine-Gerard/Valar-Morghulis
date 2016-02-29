@@ -1,6 +1,103 @@
-\section{Analyse asymptotique bidomaine: Coeur + Torse}
 
-On considère une pièce de tissu cardiaque idéalisée $\Omega$ ayant une épaisseur $h>0$. On définit $\mathbb{H}\ = \omega \times (0,h) \subset \mathbb{R}^3$, où $\omega$ est un ensemble ouvert de $\mathbb{R}^2$. De plus nous faisons l'hypothèse que $\Omega \subset \mathcal{E}$ et que $\mathbb{T} = \mathcal{E} - \mathbb{\overline{H}}$ représent le thorax.  
+\chapter{Analyse asymptotique bidomaine: Coeur+Torse}
+\label{cha:analyse-asympt-bidom}
+
+\section{Modèle Bidomaine}
+
+On considère une pièce de tissu cardiaque idéalisée $\mathbb{H}$ ayant une épaisseur $h>0$. On définit $\mathbb{H}\ = \omega \times (0,h) \subset \mathbb{R}^3$, où $\omega$ est un ensemble ouvert de $\mathbb{R}^2$. De plus nous faisons l'hypothèse que $\mathbb{H} \subset \Omega$ et que $\mathbb{T} = \Omega - \mathbb{\overline{H}}$ représent le thorax. Considérons à présent les équations bidomaine: 
+
+\begin{empheq}[left=\empheqlbrace]{align}
+  \label{eq:bidomaine}
+  &\divg((\sigma_i+\sigma_e) \nabla u_e = -\divg(\sigma_i \nabla v) \quad & \mathbb{H} \times (0,T)\\
+  &A(C \partial_t v + f(v,w)) = \divg(\sigma_i \nabla(u_e + v)) \quad & \mathbb{H} \times (0,T) \\
+  &\partial_t w = g(v,w) \quad & \mathbb{H} \times (0,T)\\
+  &\divg(\sigma_T \nabla u_T) = 0 \quad & \mathbb{T} \times (0,T)
+\end{empheq}
+
+De plus nous avons les conditions limites:
+\begin{empheq}[left=\empheqlbrace]{align}
+  \label{eq:bidomaine}
+  &(\sigma_i \nabla v) \cdot n = -(\sigma_i \nabla u_e) \cdot n \quad & \partial \mathbb{H} \\
+  &(\sigma_e \nabla u_e) \cdot n = (\sigma_T \nabla u_T) \cdot n  \quad & \partial \mathbb{H} \\
+  & u_e = u_T \quad & \partial \mathbb{H} \\
+  & (\sigma_T \nabla u_T) \cdot n = 0 \quad & \partial \mathbb{T}
+\end{empheq}
+
+
+\subsection{Adimensionnement des équations}
+\label{Adim}
+
+Nous réécrivons ici les équations bidomaine dans une version adimensionnée. En fixant des dimensions caractéristiques $t_0$, $x_0$ et en considérant l'épaisseur $h>0$ de notre pièce de tissu, nous définissons d'abord les variables adimensionnée : 
+\[
+\overline{x} = \frac{x'}{x_0}, \quad \overline{t} = \frac{t}{t_0}, \quad \overline{z} = \frac{z}{h}
+\]
+
+Le changement d'échelle sur les variables spatiales transforme le domaine $\mathbb{H} = \omega \times (0,h)$ en $\overline{\omega} \times (0,1)$ où $\overline{\omega} = \frac{1}{x_0} \omega \subset \mathbb{R}^2$. Nous appliquons également les changements d'échelles suivant aux quantités physiques : 
+\[
+\overline{u_k}(\overline{t}, \overline{x}, \overline{z}) = \frac{u_k(t,x',z) - u_r}{\delta u}, ~ k = e, i, T
+\]
+
+\[
+\overline{\sigma}_k = \frac{1}{\sigma_0} \sigma'_k, \quad \overline{\sigma}^{(3)}_k = \frac{\sigma^{(3)}_k}{\sigma_0} \sigma'_k
+\]
+
+\[
+\overline{f}(\overline{v}, \overline{w}) = \frac{1}{f_0} f(v,w), \quad \overline{g}(\overline{v}, \overline{w}) = t_0 g(v,w)
+\]
+
+Les équations bidomaines s'écrivent alors : 
+\begin{empheq}[left=\empheqlbrace]{align*}
+  \label{eq:adim_bidomaine}
+  &\divg_{\overline{x}}((\overline{\sigma}_i+\overline{\sigma}_e) \nabla_{\overline{x}} \overline{u}_e) 
+  + \frac{x_0^2}{h^2} \overline{\sigma}_{(i+e)}^{(3)} \partial_{\overline{z} \overline{z}} \overline{u}_e
+  = -\divg_{\overline{x}}(\overline{\sigma}_i \nabla \overline{v})
+  + \frac{x_0^2}{h^2} \overline{\sigma}_{i}^{(3)} \partial_{\overline{z} \overline{z}} \overline{v}\\
+  &\frac{AC x_0^2}{t_0 \sigma_0}( \partial_{\overline{t}} \overline{v} 
+  + \frac{f_0 t_0}{C \delta u} \overline{f}(\overline{v},\overline{w})) 
+  = \divg_{\overline{x}}(\overline{\sigma}_i \nabla(\overline{u}_e + \overline{v})) 
+  + \frac{x_0^2}{h^2} \overline{\sigma}_{i}^{(3)} \partial_{\overline{z} \overline{z}} \overline{v}  \\
+  &\partial_{\Ov{t}} \Ov{w} = g(\Ov{v},\Ov{w}) \\
+  &\divg(\sigma_T \nabla u_T) = 0 
+\end{empheq}
+
+On définit à présent les nombres sans dimensions suivants: 
+\[
+\alpha = AC \frac{x_0^2}{t_0 \sigma_0}, \quad \beta = \frac{f_0 t_0}{C \delta u}, \quad \varepsilon = \frac{h}{x_0}
+\]
+
+Comme on considère une couche de tissu cardiaque, le ratio $\varepsilon = \frac{h}{x_0}$ est supposé petit. On arrive finalement aux équations bidomaine suivantes:
+\begin{empheq}[left=\empheqlbrace]{align*}
+  \label{eq:adim}
+  &\divg_{\overline{x}}((\overline{\sigma}_i+\overline{\sigma}_e) \nabla_{\overline{x}} \overline{u}_e) 
+  + \frac{1}{\varepsilon^2} \overline{\sigma}_{(i+e)}^{(3)} \partial_{\overline{z} \overline{z}} \overline{u}_e
+  = -\divg_{\overline{x}}(\overline{\sigma}_i \nabla \overline{v})
+  + \frac{1}{\varepsilon^2} \overline{\sigma}_{i}^{(3)} \partial_{\overline{z} \overline{z}} \overline{v}\\
+  & \alpha (\partial_{\overline{t}} \overline{v} 
+  + \beta \overline{f}(\overline{v},\overline{w})) 
+  = \divg_{\overline{x}}(\overline{\sigma}_i \nabla(\overline{u}_e + \overline{v})) 
+  + \frac{1}{\epsilon^2} \overline{\sigma}_{i}^{(3)} \partial_{\overline{z} \overline{z}} \overline{v}  \\
+  &\partial_{\Ov{t}} \Ov{w} = g(\Ov{v},\Ov{w}) \\
+  &\divg(\sigma_T \nabla u_T) = 0 
+\end{empheq}
+
+
+\section{Modèle asymptotique}
+\label{sec:modele-asymptotique}
+Nous rappelons le problème tri-dimensionnel adimensionné, en éliminant les $\Ov{~\cdot~}$ au dessus des quantités sans dimensions:
+
+\begin{empheq}[left=\empheqlbrace]{align}
+  \label{eq:adim_bid}
+  &\divg_{x}((\sigma_i+\sigma_e) \nabla_{x} {u}_e) 
+  + \frac{1}{\varepsilon^2} {\sigma}_{(i+e)}^{(3)} \partial_{z z} {u}_e
+  = -\divg_{x}({\sigma}_i \nabla v)
+  + \frac{1}{\varepsilon^2} \sigma_{i}^{(3)} \partial_{z z} v\\
+  & \alpha (\partial_{t} v 
+  + \beta f(v,w)) 
+  = \divg_{x}(\sigma_i \nabla(u_e + v)) 
+  + \frac{1}{\epsilon^2} \sigma_{i}^{(3)} \partial_{z z} v  \\
+  &\partial_{t} w = g(v,w) \\
+  &\divg(\sigma_T \nabla u_T) = 0 
+\end{empheq}
 
 
 %%% Local Variables:

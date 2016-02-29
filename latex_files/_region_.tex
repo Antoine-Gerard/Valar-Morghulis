@@ -30,10 +30,16 @@
 \newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
 \begin{document}
 
-\message{ !name(FirsPart_AABidomain.tex) !offset(-33) }
-\section{Analyse asymptotique bidomaine: Coeur + Torse}
+\message{ !name(FirsPart_AABidomain.tex) !offset(-11) }
+\subsection{Adimensionnement des équations}
+\label{Adim}
 
-On considère une pièce de tissu cardiaque idéalisée $\Omega$ ayant une épaisseur $h>0$. On définit $\mathbb{H}\ = \omega \times (0,h) \subset \mathbb{R}^3$, où $\omega$ est un ensemble ouvert de $\mathbb{R}^2$. De plus nous faisons l'hypothèse que $\Omega \subset \mathcal{E}$ et que $\mathbb{T} = \mathcal{E} - \mathbb{\overline{H}}$  
+Nous réécrivons ici les équations bidomaine dans une version adimensionnée. En fixant des dimensions caractéristiques $t_0$, $x_0$ et en considérant l'épaisseur $h>0$ de notre pièce de tissu, nous définissons d'abord les variables adimensionnée : 
+\[
+\overline{x} = \frac{x'}{x_0}, \quad \overline{t} = \frac{t}{t_0}, \quad \overline{z} = \frac{z}{h}
+\]
+
+  
 
 
 %%% Local Variables:
@@ -41,7 +47,7 @@ On considère une pièce de tissu cardiaque idéalisée $\Omega$ ayant une épai
 %%% TeX-master: "main_bidomain"
 %%% End:
 
-\message{ !name(main_bidomain.tex) !offset(-11) }
+\message{ !name(main_bidomain.tex) !offset(-17) }
 
 \end{document}
 
