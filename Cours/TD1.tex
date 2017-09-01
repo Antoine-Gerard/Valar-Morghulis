@@ -1,0 +1,49 @@
+\documentclass{article}% autres choix : report, book
+\usepackage[utf8]{inputenc}% encodage du fichier source
+\usepackage[T1]{fontenc}% gestion des accents (pour les pdf)
+\usepackage[francais]{babel}% rajouter éventuellement english, greek, etc.
+\usepackage{textcomp}% caractères additionnels
+\usepackage{amsmath,amssymb,amsthm}% pour les maths
+\usepackage{pxfonts}% remplacer éventuellement par txfonts, fourier, etc.
+\usepackage[a4paper]{geometry}% taille correcte du papier
+\usepackage{graphicx}% pour inclure des images
+\usepackage{xcolor}% pour gérer les couleurs
+\usepackage{microtype}% améliorations typographiques
+\usepackage{hyperref}% gestion des hyperliens
+\hypersetup{pdfstartview=XYZ}% zoom par défaut
+\newtheoremstyle{exercice}%
+{\topsep}% espace avant
+{\topsep}% espace après
+{\upshape}% police du corps du théorème
+{}% indentation (vide pour rien, \parindent)
+{\bfseries}% police du titre du théorème
+{}% ponctuation après le théorème
+{\newline}% espace après le titre du théorème (\newline = saut de ligne)
+{\thmname{#1}\thmnumber{ \textup{#2}}. ---\thmnote{ \textnormal{\itshape#3}}}% spécification
+% du titre du théorème
+\theoremstyle{exercice}
+\newtheorem{exercice}{Exercice}
+\newenvironment{questions}{\begin{enumerate}}{\end{enumerate}}
+\newenvironment{sousquestions}{\begin{enumerate}}{\end{enumerate}}
+\newcommand{\R}{\mathbb{R}}
+\pagestyle{empty}
+\begin{document}
+
+\begin{center}
+  \textbf{Feuille de TD1: Continuité, dérivation et fonctions usuelles}
+\end{center}
+
+\begin{exercice}[Calculer les dérivées  des fonctions suivantes:]
+  $\begin{aligned}
+    1) f(x) =& x & 2) f(x) =& x^2 & 3) f(x) =& x^3 & 4) f(x) =& x^4 \\
+    5) f(x) =& x^{-1} & 6) f(x) =& x^{-2} & 7) f(x) =& x^{-3} & 8)
+    f(x)=&x^{-4}\\
+    9) f(x) =& 1 + x + x^{2016} & 10)f(x)&=\exp^{2\ln(x)} - x^2 &11) f(x) =& x^{-1} - \frac{1}{x} 
+  \end{aligned}$
+\end{exercice}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,531 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{hyperref}
+\usepackage{algorithm2e}
+\usepackage{fullwidth}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{bbold}
+\usepackage{pgfplots}
+\usepackage{ntheorem}
+\usepackage{eurosym}
+
+\theoremstyle{break}
+\newtheorem{mydef}{Définition}[section]
+\newtheorem{theo}{Théorème}[section]
+\newtheorem*{Rem}{Remarque}
+\newtheorem*{Proof}{preuve:}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\e}{e} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\newcommand{\scal}[2]{\left\langle {#1} , {#2} \right\rangle}
+
+\newcommand{\J}[1]{\mathcal{J}(#1)}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
+
+\begin{document}
+\section{Continuité, Dérivation et fonctions usuelles}
+
+\subsection{Continuité}
+Soit $f:\mathbb{R} \rightarrow \mathbb{R}$. On dit que f est continue
+en un point $a \in \mathbb{R}$ ssi:
+\[
+  \forall \varepsilon > 0, ~ \exists \eta > 0, ~ (| x - a| < \eta
+  \Rightarrow |f(x) - f(a)| < \epsilon )
+\]
+
+Ceci est équivalent à dire que:
+\[
+  \lim \limits_{x \to a} f(x) = f(a)
+\]
+\note Faire graphique pour insister sur le fait que f est continue si
+quand ``x se rapproche de a'' alors ``f(x) se rapproche de
+f(a)''. Rajouter un exemple de fonction discontinue (fonction en
+escalier par exemple)
+
+\vspace{1\baselineskip}
+
+\begin{center}
+  \begin{minipage}{0.45\linewidth}
+    \begin{tikzpicture}
+      \draw [ultra thin, gray] (-2,-2) grid (3,3);
+      \draw [->, thick] (-2,0) -- (3,0);
+      \draw [->, thick] (0,-2) -- (0,3);
+      \draw (3,0) node[below] {x};
+      \draw (0,3) node[below right] {y};
+      \draw (2,0) node[below] {$x_0$};
+      \draw [dashed, black, ultra thick] (2,0) -- (2,2);
+      \draw (1.5,-1) node[below] {$f(x) = E(x)$};
+      \foreach \k in {-1,...,2}
+      {
+        \draw [domain=\k:\k+1, red, very thick] plot(\x, {floor(\x)});
+        \draw [red] (\k,\k) node {$\bullet$};
+        \draw [red] (\k+1.1,\k) node {$\subset$};
+      }
+    \end{tikzpicture}
+  \end{minipage} 
+  \begin{minipage}{0.45\linewidth}
+    \begin{tikzpicture}
+      \draw [ultra thin, gray] (-2,-2) grid (3,3);
+      \draw [->, thick] (-2,0) -- (3,0);
+      \draw [->, thick] (0,-2) -- (0,3);
+      \draw (3,0) node[below] {x};
+      \draw (0,3) node[below right] {y};
+      \draw (1.41,0) node[below] {$x_0$};
+      \draw [dashed, black, ultra thick] (1.41,0) -- (1.41,2);
+      \draw (1.5,-1) node[below] {$f(x) = x^2$};
+      \draw [domain=-1.75:1.75, red, very thick] plot(\x,{\x*\x});
+    \end{tikzpicture}
+  \end{minipage}
+\end{center}
+
+\vspace{1\baselineskip}
+
+\textbf{Opérations algébriques et continuité:}
+
+\begin{itemize}[label =$\bullet$, leftmargin =2cm]
+\item Si $f,g$ continue en $x_0 \in \mathbb{R}$ alors $f+g$ et $f
+  \cdot g$ continue en $x_0$ 
+\item Si $g(x_0) \neq 0$ et $f$ continue en $x_0$ alors $\frac{f}{g}$
+  est continue en $x_0$
+\item Si $f$ est continue en $x_0$ et g est continue en $y_0 = f(x_0)$
+  alors $g \circ f$ est continue en $x_0$
+\end{itemize}
+
+\begin{theo}[\textbf{Théorème des valeurs intermédiaires}]
+  
+  Soit f une fonction \textbf{continue} définie sur un intervalle $I$. Soient $a$
+  et $b$ deux réels de $I$ tels que:
+  \[
+    a < b \text{ et } f(a)<f(b) \quad (resp. f(b) > f(a))
+  \]
+
+  Alors pour tout réels k compris entre $f(a)$ et $f(b)$ (resp. entre
+  $f(b)$ et $f(a)$) il existe au moins un réel $x_0$ compris entre $a$ et $b$ tel que:
+  \[
+    f(x_0) = k
+  \]
+ 
+\end{theo}
+
+\begin{center}  
+  \begin{tikzpicture}
+    \draw [ultra thin, gray, scale=0.5] (-6,-6) grid (6,6);
+    \draw [->, thick, scale=0.5] (-6,0) -- (6,0);
+    \draw [->, thick,scale=0.5] (0,-6) -- (0,6);
+    \draw (3,0) node[below] {x};
+    \draw (0,3) node[below right] {y};
+    \draw [domain=-6:6, red, very thick, scale=0.5,smooth]
+    plot(\x,{0.0035*(\x+5.9)*(\x+3)*(\x)*(\x-1)*(\x-5.9)});
+    \foreach \y in {-5,4}
+    {
+      \draw[scale=0.5]
+      (\y,{0.0035*(\y+5.9)*(\y+3)*(\y)*(\y-1)*(\y-5.9)}) node
+      {$\bullet$} ;
+      \draw[scale=0.5, dashed, thick]
+      (\y,{0.0035*(\y+5.9)*(\y+3)*(\y)*(\y-1)*(\y-5.9)}) --
+      (0,{0.0035*(\y+5.9)*(\y+3)*(\y)*(\y-1)*(\y-5.9)});
+      \draw[scale=0.5, dashed,thick]
+      (\y,{0.0035*(\y+5.9)*(\y+3)*(\y)*(\y-1)*(\y-5.9)}) --
+      (\y,0);
+    }
+    \draw[scale=0.5] (0,2.01) node[right] {f(a)};
+    \draw[scale=0.5] (0,2.02) node {$\bullet$};
+    \draw[scale=0.5] (0,-5.4) node[left] {f(b)};
+    \draw[scale=0.5] (0,-5.5) node {$\bullet$};
+    \draw[scale=0.5] (-5,0) node[below] {a};
+    \draw[scale=0.5] (-5,0) node {$\bullet$};
+    \draw[scale=0.5] (4,0) node[above] {b};
+    \draw[scale=0.5] (4,0) node {$\bullet$};
+    \draw[scale=0.5,thick,blue] (-6,-3) -- (6,-3);
+    \draw[scale=0.5,blue] (0,-3) node[above left] {k};
+    \draw[scale=0.5,blue] (0,-3) node {$\bullet$};
+    \draw[scale=0.5,blue] (2.85,-3) node {$\bullet$};
+    \draw[scale=0.5,blue] (5.55,-3) node {$\bullet$};
+    \draw[scale=0.5,blue] (2.85,0) node {$\bullet$};
+    \draw[scale=0.5,blue] (5.55,0) node {$\bullet$};
+    \draw[scale=0.5,blue] (2.85,0) node[above] {$x_0$};
+    \draw[scale=0.5,blue] (5.55,0) node[above] {$x_1$};
+    \draw[scale=0.5,blue,dashed, thick] (2.85,0) -- (2.85,-3);
+    \draw[scale=0.5,blue,dashed, thick] (5.55,0) -- (5.55,-3) ;
+  \end{tikzpicture}
+\end{center}
+
+\begin{prop}
+  Soit I un intervalle de $\mathbb{R}$ et $f:\mathbb{R} \to
+  \mathbb{R}$ une fonction continue. Alors l'image de I par f est un
+  intervalle de $\mathbb{R}$
+\end{prop}
+\begin{Proof}
+  On assume ici que I est un intervalle de $\mathbb{R}$ ssi pour tout
+  x,y dans I tels que $x \leq y$ alors $[x,y] \subset I$
+  Si $f(I)$ est réduit à un point le résultat est évident.
+  \newline
+  Sinon, soient $y_1$ et $y_2$ dans $f(I)$ tels que $y_1 < y_2$. Il
+  existe $x_1$ et $x_2$ dans I tels que $f(x_1) = y1$ et $f(x_2) =
+  y2$. D'après le théorème des valeurs intermédiaires (f continue sur
+  I) , pour tout $y$ tels que $y_1 = f(x_1) \leq y \leq f(x_2) = y_2$ il existe $x$ entre
+  $x_1$ et $x_2$ (ou entre $x_2$ et $x_1$) tel que $f(x) = y$. Ainsi, $[y_1,y_2]
+  = [f(x_1), f(x_2)] \subset f(I)$.
+  \newline
+  Finalement, on vient de montrer que pour tout $y_1,~y_2$ dans $f(I)$ tels que $y_1<y_2$ on a $[y_1,
+  y_2] \subset f(I)$. Donc $f(I)$ est un intervalle de $\mathbb{R}$
+  $\square$
+\end{Proof}
+
+\subsection{Dérivation}
+
+\textbf{Rappel:} L'équation d'une droite dans le plan muni d'un repère
+$(O; \vec{i}; \vec{j})$ est donnée par:
+\[
+  y = ax +b 
+\]
+
+\textbf{Exercices:} Donner l'équation de la droite passant par les
+points (1,1) et (3,2).
+
+Solution:
+
+\vspace{1\baselineskip}
+
+\begin{minipage}{0.3\linewidth}
+  \begin{align*}
+    &1 = a * 1 + b\\
+    &2 = a * 3 + b 
+  \end{align*}
+\end{minipage}
+$\Leftrightarrow$
+\begin{minipage}{0.3\linewidth}
+  \begin{align*}
+    &2*a = 1\\
+    &2 = a * 3 + b 
+  \end{align*}
+\end{minipage}
+$\Leftrightarrow$
+\begin{minipage}{0.3\linewidth}
+  \begin{align*}
+    &a = \frac{1}{2}\\
+    &b = 2 - 3*a = 2 - \frac{3}{2}=\frac{1}{2} 
+  \end{align*}
+\end{minipage}
+
+Finalement:
+\[
+  y = \frac{1}{2} * (x+1)
+\]
+
+Donner l'équation de la droite passant par les
+points $(x_0,f(x_0))$ et $(x_1,f(x_1))$.
+
+Solution:
+
+\vspace{1\baselineskip}
+
+\begin{tabular}{ccccc}
+  $\begin{aligned}
+    f(x_0) = a * x_0 + b\\
+    f(x_1) = a * x_1 + b 
+  \end{aligned}$
+& $\Leftrightarrow$
+& $\begin{aligned}
+  &a *(x_0-x_1) = f(x_0)-f(x_1)\\
+  &f(x_1) = a * x_1 + b 
+\end{aligned}$
+&$\Leftrightarrow$
+& $\begin{aligned}
+  &a = \frac{f(x_0)-f(x_1)}{x_0-x_1}\\
+  &b = f(x_1) - x_1*a = \frac{f(x_1)x_0 - f(x_0)x_1}{x_0-x_1} 
+\end{aligned}$
+\end{tabular}
+
+\vspace{1\baselineskip}
+
+Finalement:
+\[
+  y = \frac{f(x_0)-f(x_1)}{x_0-x_1} * x + \frac{f(x_1)x_0 - f(x_0)x_1}{x_0-x_1} 
+\]
+
+\begin{mydef}
+  On dit qu'un fonction $f:\mathbb{R} \to \mathbb{R}$ est dérivable en
+  $x_0$ ssi
+  \[
+    \lim \limits_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = \lim \limits_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}
+  \]
+  existe. Cette limite est alors appelée \textbf{dérivée de f en $x_0$}
+  et est notée: $\mathbf{f'(x_0)}$. On a donc:
+  \[
+    f'(x_0)=\lim \limits_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}
+  \]
+  Cette définition est équivalent eà l'éxistence d'une fonction
+  $\varepsilon(h)$ avec $\lim \limits_{h \to 0}
+  \frac{\varepsilon(h)}{h} = 0$ et une constante A telles que:
+  \[
+    f(x_0 + h) = f(x_0) + A.h + \varepsilon(h) 
+  \]
+  $(f(x_0+h) = f(x_0) + hf'(x_0) + f(x_0+h) - f(x_0) - h*f'(x_0))$
+\end{mydef}
+
+\note Insister sur la linéarisation de f autour de $x_0$. Faire exercice 1 1-4 
+
+\textbf{Opérations algébriques sur les dérivées:}
+
+\begin{itemize}[label =$\bullet$, leftmargin =2cm]
+\item Si $f,g$ dérivable en $x_0 \in \mathbb{R}$ alors $f+g$ continue
+  en $x_0$ et $(f+g)'(x_0) = f'(x_0)+g'(x_0)$
+\item Si $f,g$ dérivable en $x_0 \in \mathbb{R}$ alors $f \cdot g$ dérivable
+  en $x_0$ et $(f \cdot g)'(x_0) = f'(x_0)g(x_0) + f(x_0)g'(x_0)$
+\item Si f est dérivable en $x_0$ et si $f'(x_0) \neq 0$ alors
+  $\frac{1}{f}$ est dérivable en $x_0$ et:
+  \[
+    \big( \frac{1}{f} \big)'(x_0) = -\frac{f'(x_0)}{f^2(x_0)}
+  \]
+\item si f est dérivable en $x_0$, alors pour tout réel $\lambda$,
+  $\lambda f$ est dérivable en $x_0$. On a alors $(\lambda f)'(x_0) =
+  \lambda f'(x_0)$
+\item si f est dérivable en $x_0$ et g est dérivable en $f(x_0)$ alors
+  $g \circ f$ est dérivable en $x_0$ et:
+  \[
+    (g \circ f)'(x_0) = g'(f(x_0)) f'(x_0)
+  \]
+\end{itemize}
+
+\subsection{Sens de variation d'une fonction}
+Soit f une fonction continue sur un intervalle $[a,b]$ et dérivable
+sur $]a,b[$
+
+\begin{enumerate}[label=(\alph*), leftmargin =2cm]
+\item f est croissante (resp. décroissante) sur $[a,b]$ ssi pour tout
+  x de l'intervalle $]a,b[$ $f'(x) \geq 0$ (resp. $f'(x) \leq 0$)
+\item Si $f'(x) > 0$ (resp. $f'(x)$ < 0) pour tout x de l'intervalle
+  $[a,b]$  alors f est strictement croissante (resp. décroissante)
+\item f est constante sur $[a,b]$ ssi pour tout x de l'intervalle
+  $]a,b[$ $f'(x) = 0$
+\end{enumerate}
+
+\begin{Proof}
+  \textbf{(a)} $\Rightarrow$. Supposons que f est croissante sur
+  $[a,b]$ (resp. décroissante). Alors on a :
+  \[
+    \forall x,y \in [a,b], \quad (x<y \Rightarrow f(x) \leq f(y) )
+  \]
+  Montrons que $f'(x)>=0$ pour tout x dans l'intervalle $]a,b[$. Soit
+  $x \in ]a,b[$. Par hypothèse f est dérivable sur $]a,b[$ donc:
+  \[
+    f'(x) = \lim \limits_{h \to 0} \frac{f(x+h) - f(x)}{h}
+  \]
+  Supposons sans perte de généralité que $h>=0$. On a donc $x+h >=
+  x$. Par hypothèse $f(x+h) \geq f(x)$ (resp. $f(x+h) \leq f(x)$) et
+  donc $\frac{f(x+h) -f(x)}{h} \geq 0$ (resp. $\frac{f(x+h) -f(x)}{h}
+  \leq 0$ ). Par passage à la limite quand $h\to 0$ on arrive à $f'(x)
+  \geq 0$ (resp. $f'(x) \leq 0$ )
+
+  \vspace{1\baselineskip}
+  
+  $\Leftarrow$. Ici on suppose que $f'(x) \geq 0$ (resp. $f'(x) \leq
+  0$) et on veut montrer que f est croissante (resp. décroissante)
+  (Conséquence du Théoreme des accroissements finis qui sera vu plus
+  tard) $\square$
+\end{Proof}
+
+\begin{theo}
+  Soit $f: I \to \R$ une fonction continue et strictement croissante
+  (ou strictement décroissante).
+  \newline
+  Il existe une fonction, dite fonction réciproque et noté
+  $f^{-1}: f(I) \to I$, qui est telle que $f^{-1}(f(x)) = x $ pour
+  tout x dans $I$ et $f(f^{-1}(y)) = y$ pour tout  $y \in f(I)$
+\end{theo}
+
+\textbf{Dérivée de la fonction réciproque: }
+
+Soit $f: I \to \R$ une fonction continue, dérivable et telle que
+$f'(x) \neq 0$ sur I, alors $f^{-1}(y)$ est dérivable sur $f(I)$ et:
+\[
+  (f^{-1})'(y) = \frac{1}{f'(f^{-1}(y))}
+\]
+
+\begin{Proof}
+  Soit $y_1, ~y_2 \in f(I)$. Alors il existe $x_1, ~x_2 \in I$ tels
+  que $f(x_1) = y_1$ et $f(x_2) = y_2$. Ainsi:
+  \[
+    \frac{f^{-1}(y_1) - f^{-1}(y_2)}{y_1-y_2} =
+    \frac{f^{-1)}(f(x_1)) - f^{-1}(f(x_2))}{f(x_1)-f(x_2)}
+    = \frac{x_1 - x_2}{f(x_1)-f(x_2)}
+    = \frac{1}{\frac{f(x_1)-f(x_2)}{x_1 - x_2}}
+  \]
+  \newline
+  Ainsi en passant à la limite $x_1 \to x_2$ on a:
+  \[
+    \lim \limits_{x_1 \to x_2}\frac{1}{\frac{f(x_1)-f(x_2)}{x_1 -
+        x_2}} = \frac{1}{f'(x_2)}
+    \quad \text{ ou encore }
+    \lim \limits_{y_1 \to y_2} \frac{f^{-1}(y_1)-f^{-1}(y_2)}{y_1 -
+        y_2} = \frac{1}{f'(f^{-1}(y_2))}
+  \]
+  (Développer au tableau)
+\end{Proof}
+
+\subsection{Fonctions usuelles: }
+\subsubsection{$\exp(x)$ (ou $\e^{x}$)}
+\begin{mydef}
+  On appelle demi-vie le temps mis par une substance (molécule,
+  médicament, ...) pout perdre la moitié de son activité
+  pharmacologique ou physiologique. Par exemple, dans le domaine de la
+  radioactivité la demi-vie est le temps au bout duquel la moitié des
+  noyaux radioactifs d'une source se sont désintégré. Au bout de deux
+  demi-vies de temps $\frac{1}{2} + \frac{1}{2} \times \frac{1}{2}$ de
+  noyaux se sont désintégrés. 
+\end{mydef}
+
+\textbf{Exemple: le taux d'intérêt}
+Imaginons que l'on place à la banque une somme s qui nous rapportera
+$x = \frac{p}{100}$ au bout de N années. On est tenté de supposer que
+chaque année nous rapport $s * \frac{x}{N}$. Imaginons donc maintenant
+que l'on place la même somme s de départ mais que cette fois la banque nous
+rembourse $\frac{x}{N}$ fois la somme capitalisée par an. Dans ce cas,
+si on note $s_i$ la somme capitalisée à la i-ième on a:
+\begin{align*}
+  s_1 &= s * (1 + \frac{x}{N})\\
+  s_2 &= s_1 * (1 + \frac{x}{N}) = s * (1 + \frac{x}{N}) (1 +
+        \frac{x}{N})\\
+      & \vdots\\
+  s_N &= s_{N-1} * (1 + \frac{x}{N}) =  s * (1 + \frac{x}{N})^N
+\end{align*}
+
+Par exemple s=100000\euro, N=10 et p = 5\%.  1\textsuperscript{ère}
+proposition: $s_{10} =  100000 * (1+\frac{5}{100}) = 105000$. 2\textsuperscript{ème}
+proposition: $s_{10} =  100000 * (1+\frac{5}{10*100})^{10} \approx
+105114.01$
+
+Cette suite possède une limite, et on appelle
+\[
+  \e^{x} = \lim \limits_{N \to \infty} (1 + \frac{x}{N})^N
+\]
+
+\note $\e = \lim \limits_{N \to \infty} (1 + \frac{1}{N})^N \approx
+2.718281828459$ (Se servir de cette égalité pour établir $\e^{x}$ en
+posant $N = k*x$)
+
+Pour des décroissances (comme la demi-vie, etc.) un \og x
+négatif \fg décrit de la même façon que les taux d'intérêts positifs
+les taux d'intérêts négatifs. C'est pour cette raison -- variation
+d'un taux constant d'une quantité au cours du temps -- que la fonction
+exponentielle apparaît dans beaucoup de formules scientifiques !!
+
+On peut montrer que la fonction exponentielle est continue, même
+(infiniment) dérivable. De fait, limite et dérivée interchangent dans
+ce cas. Par conséquent:
+\[
+  \exp(x)'
+  = \lim \limits_{n \to \infty} n(1+\frac{x}{n})^{n-1} \times
+  \frac{1}{n}
+  = \lim \limits_{n \to \infty} (1+\frac{x}{n})^{n} 
+  (1+\frac{x}{n})^{-1}
+  = \e^{x} \lim \limits_{n \to \infty} (1+\frac{x}{n})^{-1}
+  = \e^{x}
+\]
+Un taux 0 correspond à aucune croissance ou décroissance et donc
+$e^0=1$
+\newpage
+\textbf{Propriétés: }
+\begin{enumerate}[label=(\alph*), leftmargin =2cm]
+\item exp est strictement croissante sur $\R$
+\item $\forall (x,y) \in \R \times \R$ on a $\exp(x+y) = \exp(x) \exp(y)$
+\item $\lim \limits_{x \to -\infty} \e^{x} = 0$ et $\lim \limits_{x \to +\infty} \e^{x} = +\infty$
+\item exp est dérivable sur $\R$ et $(\exp)'(x) = \exp(x)$
+\end{enumerate}
+
+\subsubsection{logarithme néperien $\ln(x)$}
+La fonction réciproque de l'exponentielle est notée ln et est appelé
+logarithme (néperien). Elle possède les propriétés suivantes:
+\begin{enumerate}[label=(\alph*), leftmargin =2cm]
+\item ln est strictement croissante sur $\R^+_*$
+\item $\forall (x,y) \in \R^+_* \times \R^+_*$ on a $\ln(xy) = \ln(x) +
+  \ln(y)$
+\item $\lim \limits_{x \to 0^+} \ln(x) = -\infty$ et $\lim \limits_{x
+    \to +\infty} \ln(x) = +\infty$
+\item ln est dérivable sur $\R^+_*$ et $(\ln)'(x) = \frac{1}{x}$
+\end{enumerate}
+
+\note En biologie, chimie, ... , on utilise parfois le $\log_{10}(x)$
+pour des raisons historiques. Le logarithme décimal est défini comme
+la réciproque de la fonction $f(x)=10^x$.
+
+\begin{lemme}
+  Soient $x \in \R$ et $y \in ]0 ; +\infty[$.
+  On a:
+  \[
+    y = 10^x \Leftrightarrow \log_{10}(y) = x \Leftrightarrow x\ln(10)
+    = \ln(y) \Leftrightarrow x = \frac{\ln(y)}{\ln(10)}
+  \]
+\end{lemme}
+
+\begin{Proof}
+  Soient $x \in \R$ et $y \in ]0 ; +\infty[$.
+  \newline
+  $\bullet  (y = 10^x \Leftrightarrow \log_{10}(y) = x$): définition d'une
+  fonction réciproque
+  \newline
+  $\bullet  (y = 10^x \Rightarrow x\ln(10) = \ln(y)$) :
+  \[
+    y = 10^x \Rightarrow \ln(y) = \ln(10^x) \Rightarrow \ln(y) = x \ln(10)   
+  \]
+  \newline
+  $\bullet  (y = 10^x \Rightarrow x = \frac{\ln(y)}{\ln(10)}$) : OK
+  \newline
+  $\bullet  (x = \frac{\ln(y)}{\ln(10)} \Rightarrow y = 10^x$):
+  \[
+    x = \frac{\ln(y)}{\ln(10)} \Rightarrow \ln(y) = x \ln(10)
+    \Rightarrow \exp(\ln(y)) =  \exp(x \ln(10) )
+    \Rightarrow y = 10^x
+    \quad \square
+  \]
+\end{Proof}
+
+\subsubsection{la fonction $x^{\alpha}$}
+\begin{mydef}
+Soit $\alpha \in \R$. On définit la fonction puissance $f_{\alpha}(x)$
+par:
+\[
+  \forall x \in \R_*^+  ~ f_{\alpha}(x) = \e^{\alpha  \ln(x)}
+\]
+On note: $f_{\alpha}(x)=x^{\alpha}$
+\end{mydef}
+
+On peut remarquer que $\e^{2 \ln(x)} = \e^{\ln(x)+\ln(x)} =
+\e^{\ln(x)}\e^{\ln(x)} = x \cdot x = x^2$
+
+\subsubsection{Les fonctions trigonométriques: $\sin(x), ~ \cos(x),~
+  \tan(x)$}
+En mathématiques, le cercle trigonométrique est un cercle qui permet
+de définir des notions comme celle d'angles, de radian, et les
+fonctions trigonométriques: cosinus, sinus et tangente. Il s'agit du
+cercle dont le rayon est égale à 1 centré sur l'origine du repère,
+dans le plan usuel muni d'un repère orthonormé.
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
