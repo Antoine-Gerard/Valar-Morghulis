@@ -133,6 +133,42 @@ suivante:
   \end{tikzpicture}
 \end{center}
 
+\subsection{Les fonctions trigonométriques réciproques}
+\subsubsection{L'arccosinus: $\arccos(x)$}
+
+L'arc cosinus d'un nombre réel compris entre -1 et 1 est la ``mesure principale
+de l'angle'' dont le cosinus vaut ce nombre, ``compris entre  $0$ et
+$\pi$). (Montrer qu'on a bijection sur cet intervalle ? Parler de $cos^{-1}$ sur
+les calculatrices)
+
+Cette fonction est alors la fonction réciproque de la fonction cosinus définie
+sur l'intervalle $[0,\pi]$, donc dans le plan muni du repère orthonormé usuel
+$(O,\vec{i}, \vec
+{j})$ la courbe représentative de $x \mapsto \arccos(x)$ est le
+symétrique de la courbe représentative de $x \mapsto \cos(x)$ par rapport à
+la droite d'équation $y=x$
+
+\begin{minipage}{0.4\linewidth}
+  \begin{tikzpicture}
+    \begin{axis}[
+      width = 10cm,
+      xmin = -2,
+      xmax = pi+1 ,
+      ymin = -2,
+      ymax = pi,
+      axis x line= center,
+      axis y line= center,        
+      ]
+      \addplot[mark=none, domain = 0:pi, red, smooth, thick]
+      {cos(deg(x))};
+      \addplot[mark=none, domain=-1:1, blue, smooth, thick]
+      {acos(x)/180*pi};
+      \addplot[mark=none, domain=0:3, black, smooth, thick]
+      {x};
+      \legend{$\arccos(x)$}
+    \end{axis}
+  \end{tikzpicture}
+\end{minipage}
 
 %%% Local Variables:
 %%% mode: latex
