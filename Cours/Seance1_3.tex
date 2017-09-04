@@ -21,6 +21,13 @@
 \usepackage{pgfplots}
 \usepackage{ntheorem}
 \usepackage{eurosym}
+\def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
+\makeatletter
+\def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
+\makeatother
+\def\verticaltext#1{\rotatebox[origin=c]{-90}{\catcode`\~=13\def~{\vbox to 0.33em{}}\parseletters{#1}}}
+
+
 
 \theoremstyle{break}
 \newtheorem{mydef}{Définition}[section]
@@ -524,6 +531,74 @@ fonctions trigonométriques: cosinus, sinus et tangente. Il s'agit du
 cercle dont le rayon est égale à 1 centré sur l'origine du repère,
 dans le plan usuel muni d'un repère orthonormé.
 
+\begin{center}  
+  \begin{tikzpicture}
+    \draw [ultra thin, gray, dashed] (-6,-6) grid (6,6);
+    \draw [thick] (-6,0) -- (6,0);
+    \draw [thick] (0,-6) -- (0,6);
+    \draw [->, thick] (0,0) -- (4,0);
+    \draw [->, thick] (0,0) -- (0,4);
+    \draw [scale = 4, thick] (0,0) circle (1);
+    \draw [scale = 4, thick] (0,0)--(1.1,1.1);
+    \draw (1,0) arc (0:45:1);
+    \draw (22:1.3) node {$\alpha$};
+    \draw [scale=4, thick, red, dashed] (45:1) -- (0:0.7071);
+    \draw [scale=4, thick, red, dashed] (90:0.7071) -- (45:1);
+    \draw [scale=4, thick, red, dashed] (1,0) -- (1,1);
+    \draw [scale=4, red, thick] (0.3, 0.77) node {$\cos(\alpha)$} ;
+    \draw [scale=4, red, thick] (0.77, 0.33) node {\rotatebox{90}{$\sin(\alpha)$}} ;
+    \draw [scale=4, red, thick] (1.1, 0.5) node {\rotatebox{90}{$\tan(\alpha)$}} ;
+    \draw [scale=4] (1,1) node {{$\bullet$}} ;
+    \draw [scale=4] (45:1) node {{$\bullet$}} ;
+    \draw [scale=4] (1,0) node[below right] {(1,0)} ;
+    \draw [scale=4] (0,1) node[above left] {(0,1)} ;
+  \end{tikzpicture}
+\end{center}
+
+$\bullet ~ \cos(x)$:
+
+Dans un triangle rectangle, le cosinus est défini comme le rapport de la
+longueur de son côté adjacentsur la longueur de son hypoténuse. 
+
+Si on jette un oeil au cercle trigonométrique, on peut définir le cosinus d'un
+angle $\alpha$ de la sorte: on considère A le point d'intersection de la droite
+passant par O et d'angle $\alpha$. Le cosinus de l'angle $\alpha$ est alors
+la projection de cette droite sur l'axe horizontale.
+
+Voici les principales propriétés de la fonction cosinus:
+\begin{enumerate}[label=(\alph*), leftmargin =2cm]
+\item $-1 <= \cos(x) <= 1 ~ \forall x \in \R$
+\item $\cos(-x) = cos(x) ~ \forall x \in \R$
+\item $\cos(x+2k\pi) = cos(x) ~ \forall x \in \R ~ et ~k \in \mathbb{N}$
+  (2-$\pi$ périodique)
+\item La fonction cosinus est dérivable sur $\R$ et $\cos'(x) = -\sin(x)$
+\end{enumerate}
+
+\vspace{1\baselineskip}
+
+$\bullet ~ \sin(x)$:
+
+Dans un triangle rectangle, le sinus est défini comme le rapport de la
+longueur de son côté opposé sur la longueur de son hypoténuse. 
+
+Si on jette un oeil au cercle trigonométrique, on peut définir le sinus d'un
+angle $\alpha$ de la sorte: on considère A le point d'intersection de la droite
+passant par O et d'angle $\alpha$. Le sinus de l'angle $\alpha$ est alors
+la projection de cette droite sur l'axe verticale.
+
+Voici les principales propriétés de la fonction cosinus:
+\begin{enumerate}[label=(\alph*), leftmargin =2cm]
+\item $-1 <= \sin(x) <= 1 ~ \forall x \in \R$
+\item $\sin(-x) = -\sin(x) ~ \forall x \in \R$
+\item $\sin(x+2k\pi) = \sin(x) ~ \forall x \in \R ~ et ~k \in \mathbb{N}$
+  (2-$\pi$ périodique)
+\item La fonction cosinus est dérivable sur $\R$ et $\sin'(x) = \cos(x)$
+\end{enumerate}
+
+\note: Montrer que pour tout $x$ dans $\R$ on a la relation suivante:
+\[
+  \cos^2(x) + \sin^2(x) = 1 \text{ (Indication: Utiliser le théorème de Pythagore)}
+\]
 \end{document}
 %%% Local Variables:
 %%% mode: latex
