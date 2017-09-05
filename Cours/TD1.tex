@@ -10,37 +10,215 @@
 \usepackage{xcolor}% pour gérer les couleurs
 \usepackage{microtype}% améliorations typographiques
 \usepackage{hyperref}% gestion des hyperliens
+\usepackage{answers}
+%\usepackage{ntheorem}
+
 \hypersetup{pdfstartview=XYZ}% zoom par défaut
-\newtheoremstyle{exercice}%
-{\topsep}% espace avant
-{\topsep}% espace après
-{\upshape}% police du corps du théorème
-{}% indentation (vide pour rien, \parindent)
-{\bfseries}% police du titre du théorème
-{}% ponctuation après le théorème
-{\newline}% espace après le titre du théorème (\newline = saut de ligne)
-{\thmname{#1}\thmnumber{ \textup{#2}}. ---\thmnote{ \textnormal{\itshape#3}}}% spécification
-% du titre du théorème
-\theoremstyle{exercice}
-\newtheorem{exercice}{Exercice}
+
 \newenvironment{questions}{\begin{enumerate}}{\end{enumerate}}
 \newenvironment{sousquestions}{\begin{enumerate}}{\end{enumerate}}
 \newcommand{\R}{\mathbb{R}}
 \pagestyle{empty}
+
+\newtheorem{Exc}{EXERCICE}
+\Newassociation{correction}{Soln}{mycor}
+\renewcommand{\Solnlabel}[1]{CORRIGE #1}
+\def\exo#1{%
+  \futurelet\testchar\MaybeOptArgmyexoo}
+\def\MaybeOptArgmyexoo{
+  \ifx[\testchar \let\next\OptArgmyexoo
+  \else \let\next\NoOptArgmyexoo \fi \next}
+\def\OptArgmyexoo[#1]{%
+  \begin{Exc}[#1]\normalfont}
+  \def\NoOptArgmyexoo{%
+    \begin{Exc}\normalfont}
+    \newcommand{\finexo}{\end{Exc}}
+  \newcommand{\flag}[1]{}
+  \newif\ifprof
+  \newcommand{\entete}[1]
+
+
+
+\DeclareMathOperator{\e}{e} %exponentielle
+
 \begin{document}
+
+\Opensolutionfile{mycor}[TD1_correc]
+
+\proftrue
 
 \begin{center}
   \textbf{Feuille de TD1: Continuité, dérivation et fonctions usuelles}
 \end{center}
 
-\begin{exercice}[Calculer les dérivées  des fonctions suivantes:]
-  $\begin{aligned}
+\exo{}[Calculer les dérivées  des fonctions suivantes]
+\begin{align*}
     1) f(x) =& x & 2) f(x) =& x^2 & 3) f(x) =& x^3 & 4) f(x) =& x^4 \\
     5) f(x) =& x^{-1} & 6) f(x) =& x^{-2} & 7) f(x) =& x^{-3} & 8)
     f(x)=&x^{-4}\\
-    9) f(x) =& 1 + x + x^{2016} & 10)f(x)&=\exp^{2\ln(x)} - x^2 &11) f(x) =& x^{-1} - \frac{1}{x} 
-  \end{aligned}$
-\end{exercice}
+    9) f(x) =& 1 + x + x^{2016} & 10)f(x)=&\exp^{2\ln(x)} - x^2 &11) f(x) =& x^{-1} - \frac{1}{x} 
+\end{align*}
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}[Corrigé exercice 1]
+  \begin{align*}
+    1) f'(x) =& 1 & 2) f'(x) =& 2x & 3) f'(x) =& 3x^2 & 4) f'(x) =& 4x^3 \\
+    5) f'(x) =& -x^{-2} & 6) f'(x) =& -2x^{-3} & 7) f(x) =& -3x^{-4} & 8) f(x)=&-4x^{-5}\\
+    9) f'(x) =& 1 + 2016x^{2015} & 10)f'(x)=& 0 &11)f'(x)=& 0 
+  \end{align*}
+  
+\end{correction}
+\fi  
+\finexo
+
+\medskip
+
+\exo{}[Calculer les dérivées  des fonctions suivantes]
+\begin{align*}
+    1) f(x) =& (1+x)\sin(x)   & 2) f(x) =& \sin(x) \cos(x) & 3) f(x) =& sin^2(x) \\
+    4) f(x) =& x \arctan(x)   & 5) f(x) =& \arctan^2(x)   & 6) f(x) =& x^2 \e^x\\
+    7) f(x) =& \sin(x) \ln(x) & 8)f(x) =& \e^x \arcsin(x)  & 9) f(x) =& x \sin(x) \e^x 
+\end{align*}
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}[Corrigé exercice 2]
+  \begin{align*}
+    1) f'(x) =& (1+x)\cos(x) + \sin(x)  & 2) f'(x) =& \cos^2(x)-\sin^2(x)
+                                        & 3) f'(x) =& 2\cos(x)\sin(x) \\
+    4) f'(x) =& \arctan(x) + \frac{1}{1+x^2} & 5) f'(x) =& 2\frac{\arctan(x)}{1+x^2}
+                                             & 6) f'(x) =& \e^x(x^2 + 2x)\\
+    7) f'(x) =& \cos(x) \ln(x) + \frac{sin(x)}{x} & 8)f'(x) =& \e^x(\arcsin(x) + \frac{1}{\sqrt{1-x^2}})
+                                                  & 9)f'(x) =& \e^x(x\sin(x) + \sin(x) + x\cos(x)) 
+\end{align*}
+\end{correction}
+\fi
+\finexo
+
+\medskip
+
+\exo{}[Calculer les dérivées  des fonctions suivantes:]
+\begin{align*}
+  1) f(x) =& (1+x)^2  & 2) f(x) =& (5+x)^3 & 3) f(x) =& \frac{1}{1+x} & 4) f(x) =& \frac{1}{(1+x)^2}\\
+  5) f(x) =& \frac{1+x}{2+x} & 6) f(x) =& \frac{x^2+2}{x^3+3} & 7) f(x) =& \sin(1+x)
+                                                              & 8)f(x) =& \sin(42x) \\
+  9) f(x) =& \sin(\frac{1}{x}) &10) f(x) =& \frac{1}{\sin(x)} & 11)f(x) =& \frac{\cos(x)}{\sin(x)}
+                                                              & 12)f(x) =& \ln(1+x) \\
+  13) f(x) =& \ln(\sin(x)) &14) f(x) =& \ln(\e(x)) & 15)f(x) =& \ln(\sqrt{1+x})
+                                                   & 16)f(x) =& \e^{ax+b} \\
+  17) f(x) =& \e^{\cos(x)} & 18) f(x) =& e^{\cos(2x)} & 19) f(x) =& \sqrt{x+x^2}
+                                                      & 20) f(x) =& \frac{1}{\sqrt{x+x^2}}\\
+  21) f(x) =& \frac{\sqrt{1+x}}{\sqrt{2+x}} \text{ (Etudier ensemble de définition) }
+\end{align*}
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  \begin{align*}
+    1) f'(x) =& 2(1+x)  & 2) f'(x) =& 3(5+x)^2 & 3) f'(x) =& \frac{-1}{(1+x)^2}
+                                               & 4) f'(x) =& \frac{-2}{(1+x)^3}\\
+    5) f'(x) =& \frac{1}{(2+x)^2} & 6) f'(x) =& \frac{-x^4-6x^2+6x}{(x^3+3)^2}
+ &  7) f'(x) =& \cos(1+x)         & 8) f'(x) =& 42\cos(42x) \\
+    9) f'(x) =& -\frac{1}{x^2}\cos(\frac{1}{x}) &10) f'(x) =& \frac{1}{\sin(x)}
+ & 11) f'(x) =& \frac{-1}{\sin^2(x)}           &12) f'(x) =& \frac{1}{1+x} \\
+   13) f'(x) =& \frac{\cos(x)}{\sin(x)} &14) f'(x) =& 1
+ & 15) f'(x) =& \frac{1}{2(1+x)}        &16) f'(x) =& a\e^{ax+b} \\
+   17) f'(x) =& -\sin(x)\e^(\cos(x))    &18) f'(x) =& -2\sin(x)e^{\cos(2x)}
+ & 19) f'(x) =& \frac{x}{\sqrt{x+x^2}}  &20) f'(x) =& -\frac{x}{(x+x^2) \sqrt{x+x^2}}\\
+   21) f'(x) =& \frac{1}{2(2+x)\sqrt{(1+x)(2+x)}}
+  \end{align*}
+\end{correction}
+\fi
+\finexo
+
+\medskip
+
+\exo{}[Calculer les limites en utilisant la définition de la dérivée]
+\[
+  \lim  \limits_{x \to 0} \frac{\sin(x)}{x},
+\quad \lim  \limits_{x \to 0} \frac{\sin(x^2)}{x},
+\quad \lim  \limits_{x \to 0} \frac{\sqrt{x+1} - 1}{x},
+\quad \lim  \limits_{x \to 1} \frac{\sin(\pi x)}{x-1},
+\quad \lim  \limits_{x \to 0} \frac{\e^x-1}{x},
+\quad \lim  \limits_{n \to \infty} (1+\frac{1}{n})^n
+\]
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  \begin{align*}
+    &1) \lim \limits_{x \to 0} \frac{\sin(x)}{x} = \lim \limits_{x \to 0}
+                                                   \frac{\sin(x)-\sin(0)}{x-0}
+                                                   = (\sin(x))'_{|x=0} = 1 \\
+    \\
+    &2) \lim \limits_{x \to 0} \frac{\sin(x^2)}{x} = \lim \limits_{x \to 0}
+                                                   \frac{\sin(x^2)-\sin(0)}{x-0}
+                                                    = (\sin(x^2))'_{|x=0} = 0 \\
+    \\
+    &3) \lim \limits_{x \to 0} \frac{\sqrt{x+1}-1}{x} = \lim \limits_{x \to 0}
+                                                        \frac{\sqrt{x+1}-\sqrt{0+1}}{x-0}
+                                                     = (\sqrt{x+1})'_{|x=0} =
+                                                        \frac{1}{2} \\
+    \\
+    &4) \lim \limits_{x \to 0} \frac{\e^{x}-1}{x} = \lim \limits_{x \to 0}
+                                                        \frac{\e^{x}-\e^{0}}{x-0}
+                                                  = (\e^{x})'_{|x=0} = 1 \\
+  \end{align*}
+
+  Pour le $5)$ c'est un peu plus subtil. Dans un premier temps on pose $x =
+  \frac{1}{n}$. Ainsi on a:
+  \[
+    \lim  \limits_{n \to \infty} (1+\frac{1}{n})^n =
+    \lim  \limits_{x \to 0} (1+x)^{\frac{1}{x}}
+  \]
+
+  Puis on pose $y = x-1$ et on a:
+  \[
+    \lim  \limits_{x \to 0} (1+x)^{\frac{1}{x}} =
+    \lim  \limits_{y \to 1} y^{\frac{1}{y-1}} =
+    \lim  \limits_{y \to 1} \e^{\frac{\ln(y)-ln(1)}{y-1}}=
+    \e^{(ln(x))'_{|x=1}} = \e^1
+  \]
+\end{correction}
+\fi
+\finexo
+
+\exo{}[Etude de $\arccos(x) + \arcsin(x)$]
+~\\
+Dans cette exercice on se propose d'étudier la fonction:
+\[
+  \begin{array}{cccccc}
+     f & : & [-1,1] & \to & \R \\ 
+       & & x & \mapsto & \arccos(x) + \arcsin(x) \\
+  \end{array}
+\]
+\begin{enumerate}
+\item Montrer que f est dérivable sur $]-1,1[$
+\item Calculer $f'(x)$ pour tout x de $]-1,1[$
+\item Calculer $f(0)$
+\item Conclure
+\end{enumerate}
+
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~ \\
+  \begin{enumerate}
+  \item f est la somme de deux fonctions dérivables sur $]-1,1[$ donc f est
+    dérivable sur $]-1,1[$
+  \item $f'(x) = \frac{-1}{\sqrt{1-x^2}} + \frac{1}{\sqrt{1-x^2}} = 0$
+  \item $f(0) = \frac{\pi}{2} + 0 = \frac{\pi}{2}$
+  \item $f'(0)= 0$ sur l'intervalle $]-1,1[$ donc f est constante sur $[-1,1]$
+    et on a
+    \[
+      \forall x \in [-1,1] \qquad f(x) = \arccos(x) + \arcsin(x) = \frac{\pi}{2} = f(0)
+    \]
+  \end{enumerate}
+\end{correction}
+\fi
+\finexo
+
+\newpage
+\setcounter{page}{1}
+\Closesolutionfile{mycor}
+\Readsolutionfile{mycor}
 
 \end{document}
 %%% Local Variables:

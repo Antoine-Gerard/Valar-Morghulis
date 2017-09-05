@@ -6,7 +6,7 @@ $a$ la longueur du côté adjacent à $\alpha$ et $o$ la longueur du côté
 opposé on a :
 \[
   \tan(\alpha) = \frac{o}{a} = \frac{\frac{o}{h}}{\frac{a}{h}} =
-  \frac{sin(\alpha)}{\cos(\alpha)}
+  \frac{\sin(\alpha)}{\cos(\alpha)}
 \]
 
 \textbf{Problème: } Que se passe t'il quand $\alpha = \frac{\pi}{2} +
@@ -20,7 +20,7 @@ suivante:
   $\begin{array}{cccccc}
      f & : & \R \backslash \{ \frac{pi}{2} + k \pi \} & \to & \R, &
        k \in \mathbb{Z}\\
-       & & x & \mapsto & \tan(x)=\frac{sin(x)}{cos(x)} \\
+       & & x & \mapsto & \tan(x)=\frac{\sin(x)}{\cos(x)} \\
    \end{array}$
  \end{center}
 
@@ -30,10 +30,10 @@ suivante:
   $[(2k+1)\frac{\pi}{2}, (2k+1)\frac{\pi}{2} + \pi],~ k \in \mathbb{Z}$
 \item $\tan$ est dérivable sur chaque intervalle de la forme
   $[(2k+1)\frac{\pi}{2}, (2k+1)\frac{\pi}{2} + \pi]$ et $\tan'(x)
-  =\frac{1}{cos^2(x)} = 1+tan^2(x)$ (A montrer)
+  =\frac{1}{\cos^2(x)} = 1+\tan^2(x)$ (A montrer)
 \item $\tan$ est croissante sur chaque intervalle de la forme
   $[(2k+1)\frac{\pi}{2}, (2k+1)\frac{\pi}{2} + \pi]$ 
-\item $\tan(x+2k\pi) = tan(x),~ k \in \mathbb{Z}$ (2-$\pi$
+\item $\tan(x+2k\pi) = \tan(x),~ k \in \mathbb{Z}$ (2-$\pi$
   périodique)
 \item $\lim \limits_{x \to -\frac{\pi}{2}^+} tan(x) = -\infty$ et $\lim
   \limits_{x \to \frac{\pi}{2}^-} tan(x) = \infty$ 
@@ -138,7 +138,7 @@ suivante:
 
 L'arc cosinus d'un nombre réel compris entre -1 et 1 est la ``mesure principale
 de l'angle'' dont le cosinus vaut ce nombre, ``compris entre  $0$ et
-$\pi$). (Montrer qu'on a bijection sur cet intervalle ? Parler de $cos^{-1}$ sur
+$\pi$. (Montrer qu'on a bijection sur cet intervalle ? Parler de $cos^{-1}$ sur
 les calculatrices)
 
 Cette fonction est alors la fonction réciproque de la fonction cosinus définie
@@ -148,16 +148,17 @@ $(O,\vec{i}, \vec
 symétrique de la courbe représentative de $x \mapsto \cos(x)$ par rapport à
 la droite d'équation $y=x$
 
-\begin{minipage}{0.4\linewidth}
+\begin{center}
   \begin{tikzpicture}
     \begin{axis}[
-      width = 10cm,
-      xmin = -2,
-      xmax = pi+1 ,
-      ymin = -2,
+      width = 12cm,
+      xmin = -1,
+      xmax = pi,
+      ymin = -1,
       ymax = pi,
       axis x line= center,
-      axis y line= center,        
+      axis y line= center,
+      legend style = {at={(axis cs:2,1)}, anchor=north west}
       ]
       \addplot[mark=none, domain = 0:pi, red, smooth, thick]
       {cos(deg(x))};
@@ -165,11 +166,132 @@ la droite d'équation $y=x$
       {acos(x)/180*pi};
       \addplot[mark=none, domain=0:3, black, smooth, thick]
       {x};
-      \legend{$\arccos(x)$}
+      \legend{$\cos(x)$, $\arccos(x)$, $y=x$}
     \end{axis}
   \end{tikzpicture}
-\end{minipage}
+\end{center}
 
+\textbf{Propriétés de la fonction arccosinus: }
+\begin{itemize}[label=$\bullet$, leftmargin=2cm]
+\item $\arccos$ est continue sur  $[-1,1]$
+\item $\arccos$ est dérivable sur $]-1,1[$ et
+  \[
+    \arccos'(x)=\frac{-1}{\sqrt{1-x^2}} \text{ (À montrer avec dérivée
+      d'une fonction réciproque)}
+  \]
+\item $\arccos$ est décroissante sur $[-1,1]$
+\end{itemize}
+
+\subsubsection{L'arcsinus: $\arcsin(x)$}
+
+L'arc sinus d'un nombre réel compris entre -1 et 1 est la ``mesure principale
+de l'angle'' dont le sinus vaut ce nombre, ``compris entre  $-\frac{\pi}{2}$ et
+$\frac{\pi}{2}$. (Montrer qu'on a bijection sur cet intervalle ? Parler de $sin^{-1}$ sur
+les calculatrices)
+
+Cette fonction est alors la fonction réciproque de la fonction sinus définie
+sur l'intervalle $[-\frac{\pi}{2},\frac{\pi}{2}]$, donc dans le plan muni du repère orthonormé usuel
+$(O,\vec{i}, \vec{j})$ la courbe représentative de $x \mapsto \arcsin(x)$ est le
+symétrique de la courbe représentative de $x \mapsto \sin(x)$ par rapport à
+la droite d'équation $y=x$
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[
+      width = 12cm,
+      xmin = -pi/2 - 0.2,
+      xmax =  pi/2 + 0.2 ,
+      ymin = -pi/2 - 0.2,
+      ymax = pi/2  + 0.2 ,
+      axis x line= center,
+      axis y line= center,
+      legend pos = south east
+      ]
+      \addplot[mark=none, domain = -pi/2:pi/2, red, smooth, thick]
+      {sin(deg(x))};
+      \addplot[mark=none, domain=-1:1, blue, smooth, thick]
+      {asin(x)/180*pi};
+      \addplot[mark=none, domain=0:3, black, smooth, thick]
+      {x};
+      \legend{$\sin(x)$, $\arcsin(x)$, $y=x$}
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\textbf{Propriétés de la fonction arcsinus: }
+\begin{itemize}[label=$\bullet$, leftmargin=2cm]
+\item $\arcsin$ est continue sur  $[-1,1]$
+\item $\arcsin$ est dérivable sur $]-1,1[$ et
+  \[
+    \arcsin'(x)=\frac{1}{\sqrt{1-x^2}} \text{ (À montrer avec dérivée
+      d'une fonction réciproque)}
+  \]
+\item $\arcsin$ est croissante sur $[-1,1]$
+\end{itemize}
+
+\subsubsection{L'arctangente: $\arctan(x)$}
+
+L'arc tangente d'un nombre réel compris entre $-\infty$ et $\infty$ est la ``mesure principale
+de l'angle'' dont la tangente vaut ce nombre, ``compris entre  $-\frac{\pi}{2}$ et
+$\frac{\pi}{2}$. (Montrer qu'on a bijection sur cet intervalle ? Parler de $tan^{-1}$ sur
+les calculatrices)
+
+Cette fonction est alors la fonction réciproque de la fonction tangente définie
+sur l'intervalle $[-\frac{\pi}{2},\frac{\pi}{2}]$, donc dans le plan muni du repère orthonormé usuel
+$(O,\vec{i}, \vec{j})$ la courbe représentative de $x \mapsto \arctan(x)$ est le
+symétrique de la courbe représentative de $x \mapsto \tan(x)$ par rapport à
+la droite d'équation $y=x$
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[
+      width = 12cm,
+      xmin = -10,
+      xmax =  10,
+      ymin = -10,
+      ymax =  10,
+      axis x line= center,
+      axis y line= center,
+      legend pos = south east
+      ]
+      \addplot[mark=none, domain = -pi/2+0.1:pi/2-0.1, red, smooth, thick]
+      {tan(deg(x))};
+      \addplot[mark=none, domain=-10:10, blue, smooth, thick]
+      {atan(x)/180*pi};
+      \addplot[mark=none, domain=-10:10, black, smooth, thick]
+      {x};
+      \legend{$\tan(x)$, $\arctan(x)$, $y=x$}
+      \foreach \k in {-1,1}
+      {
+        \addplot[dashed, thick, smooth, black] coordinates
+        {(\k*pi/2,-10)(\k*pi/2,10)};
+        \addplot[dashed, thick, smooth, black] coordinates
+        {(-10,\k*pi/2)(10,\k*pi/2)};
+      }
+      \node at (axis cs:pi/2,8) [anchor=south west]
+      {$x=\frac{\pi}{2}$};
+      \node at (axis cs:-pi/2,8) [anchor=south east]
+      {$x=-\frac{\pi}{2}$};
+      \node at (axis cs:-pi/2,8) [anchor=south east]
+      {$x=-\frac{\pi}{2}$};
+      \node at (axis cs:8, pi/2)  [above]
+      {$y=\frac{\pi}{2}$};
+      \node at (axis cs:8, -pi/2) [below]
+      {$y=-\frac{\pi}{2}$};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\textbf{Propriétés de la fonction arcsinus: }
+\begin{itemize}[label=$\bullet$, leftmargin=2cm]
+\item $\arctan$ est continue sur  $\R$
+\item $\arctan$ est dérivable sur $\R$ et
+  \[
+    \arctan'(x)=\frac{1}{1+x^2} \text{ (À montrer avec dérivée
+      d'une fonction réciproque)}
+  \]
+\item $\arctan$ est croissante sur $\R$
+\end{itemize}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "Seance1_3"
