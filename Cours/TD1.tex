@@ -11,6 +11,7 @@
 \usepackage{microtype}% améliorations typographiques
 \usepackage{hyperref}% gestion des hyperliens
 \usepackage{answers}
+\usepackage{tikz, tkz-tab}
 %\usepackage{ntheorem}
 
 \hypersetup{pdfstartview=XYZ}% zoom par défaut
@@ -38,7 +39,7 @@
   \newcommand{\entete}[1]
 
 
-
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
 \DeclareMathOperator{\e}{e} %exponentielle
 
 \begin{document}
@@ -71,8 +72,6 @@
 \fi  
 \finexo
 
-\medskip
-
 \exo{}[Calculer les dérivées  des fonctions suivantes]
 \begin{align*}
     1) f(x) =& (1+x)\sin(x)   & 2) f(x) =& \sin(x) \cos(x) & 3) f(x) =& sin^2(x) \\
@@ -94,8 +93,6 @@
 \fi
 \finexo
 
-\medskip
-
 \exo{}[Calculer les dérivées  des fonctions suivantes:]
 \begin{align*}
   1) f(x) =& (1+x)^2  & 2) f(x) =& (5+x)^3 & 3) f(x) =& \frac{1}{1+x} & 4) f(x) =& \frac{1}{(1+x)^2}\\
@@ -107,7 +104,7 @@
                                                    & 16)f(x) =& \e^{ax+b} \\
   17) f(x) =& \e^{\cos(x)} & 18) f(x) =& e^{\cos(2x)} & 19) f(x) =& \sqrt{x+x^2}
                                                       & 20) f(x) =& \frac{1}{\sqrt{x+x^2}}\\
-  21) f(x) =& \frac{\sqrt{1+x}}{\sqrt{2+x}} \text{ (Etudier ensemble de définition) }
+  21) f(x) =& \frac{\sqrt{1+x}}{\sqrt{2+x}}
 \end{align*}
 \ifprof\par
 \emph{Corrigé}\par
@@ -121,15 +118,13 @@
  & 11) f'(x) =& \frac{-1}{\sin^2(x)}           &12) f'(x) =& \frac{1}{1+x} \\
    13) f'(x) =& \frac{\cos(x)}{\sin(x)} &14) f'(x) =& 1
  & 15) f'(x) =& \frac{1}{2(1+x)}        &16) f'(x) =& a\e^{ax+b} \\
-   17) f'(x) =& -\sin(x)\e^(\cos(x))    &18) f'(x) =& -2\sin(x)e^{\cos(2x)}
+   17) f'(x) =& -\sin(x)\e^{\cos(x)}    &18) f'(x) =& -2\sin(x)e^{\cos(2x)}
  & 19) f'(x) =& \frac{x}{\sqrt{x+x^2}}  &20) f'(x) =& -\frac{x}{(x+x^2) \sqrt{x+x^2}}\\
    21) f'(x) =& \frac{1}{2(2+x)\sqrt{(1+x)(2+x)}}
   \end{align*}
 \end{correction}
 \fi
 \finexo
-
-\medskip
 
 \exo{}[Calculer les limites en utilisant la définition de la dérivée]
 \[
@@ -176,6 +171,15 @@
     \lim  \limits_{y \to 1} \e^{\frac{\ln(y)-ln(1)}{y-1}}=
     \e^{(ln(x))'_{|x=1}} = \e^1
   \]
+
+  \note Il y a encore mieux que poser $y=x-1$, il suffit de considérer
+  la fonction $f: x \mapsto \ln(1+x)$ et on a :
+  \[
+    \lim  \limits_{x \to 0} (1+x)^{\frac{1}{x}} =
+    \lim  \limits_{x \to 0} \e^{\frac{\ln(1+x)}{x}}=
+    \lim  \limits_{x \to 0} \e^{\frac{f(x) - f(0)}{x-0}}=
+    f'(x)_{|x=0} = \e^1
+  \]
 \end{correction}
 \fi
 \finexo
@@ -212,6 +216,67 @@ Dans cette exercice on se propose d'étudier la fonction:
     \]
   \end{enumerate}
 \end{correction}
+\fi
+\finexo
+
+\exo{}
+~\\
+Étudier la suite $u_n = (1+\frac{1}{n})$ en exprimant $u_n$ à l'aide
+de $\ln(.)$ et $\exp(.)$ et en posant $n=\frac{1}{x}$.
+
+\note: On pourra découper l'exercice comme suit:
+\begin{enumerate}
+\item Montrer que $u_n = g(\frac{1}{n})$ avec g une fonction dont on
+  précisera l'ensemble de définition. (Indications: poser $x = \frac{1}{n}$)
+\item Donner l'ensemble de dérivabilité de g et donner sa dérivée sur
+  cet ensemble.
+\item Soit $x \in ]0,+\infty[$. Donner le tableau de variations de $x \ln(x) - x$.
+\item Dresser le tableau de variation de g. 
+\item Conclure quant à $u_n$ (Sens de variation, limite)
+\end{enumerate}
+
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~ \\
+  On pose $x=\frac{1}{n}$ et on étudie la fonction
+  \[
+    \begin{array}{cccccc}
+      g & : & ]0,1] & \to & \R \\ 
+        & & x & \mapsto & (1+x)^{\frac{1}{x}} = \e^{\frac{\ln(1+x)}{x}} \\
+    \end{array}
+  \]
+
+  On a $u_n = g(\frac{1}{n})$. $g$ est dérivable sur $]0,1]$ et
+  \[
+    g'(x) = \e^{\frac{\ln(1+x)}{x}} \Big( -\frac{\ln(1+x)}{x^2} +
+            \frac{1}{x(1+x)} \Big) 
+          = \e^{\frac{\ln(1+x)}{x}} \Big( \frac{-(x+1)\ln(1+x) +
+            x}{x^2(1+x)} \Big)
+  \]
+
+  Étude de $f : x \mapsto x\ln(x) - x$ sur $]0,+\infty[$
+  \begin{center}
+    \begin{tikzpicture}
+      \tkzTab{$x$ / 1 , $f'(x)=\ln(x)$ / 1, $f(x)$ / 1.5}{$0$,
+        $1$, $+\infty$}{, -, z, +, }{+C /$0$ , -/ -1, +/ $+\infty$}
+    \end{tikzpicture}
+  \end{center}
+
+  Ainsi on peut conclure que $\forall x \in \R^+_*,~ x\ln(x) \geq
+  x-1$. Donc si on revient à $g'(x)$ on a $(x+1) \ln(1+x) \geq x
+  ~\forall x \in ]0,1]$ et donc $x - (x+1) \ln(1+x) <=0$. D'où:
+  \begin{center}
+    \begin{tikzpicture}
+      \tkzTabInit{$x$ / 1 , $f(x)$ / 1.5}{$0$,$1$}
+      \tkzTabVar{+C / $\e^1$, -/ 2}
+    \end{tikzpicture}
+  \end{center}
+
+  Ainsi puisque $u_n = g(\frac{1}{n})$ on a $u_n \leq u_{n+1} \quad (\frac{1}{n}>\frac{1}{n+1})$ et
+  $\lim \limits_{n \to \infty} = e^1$
+\end{correction}
+
 \fi
 \finexo
 

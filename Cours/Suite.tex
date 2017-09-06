@@ -133,6 +133,41 @@ suivante:
   \end{tikzpicture}
 \end{center}
 
+\begin{center}
+  \renewcommand{\arraystretch}{3} %donne la distance entre les lignes%
+  \begin{tabular}{|l|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+    \hline
+    x & 0 & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$\\
+    \hline
+    $\cos(x)$ & 1 & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0\\
+    \hline
+    $\sin(x)$ & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1\\
+    \hline
+    $\tan(x)$ & 0 & $\frac{\sqrt{3}}{3}$ & 1 & $\sqrt{3} $& Non définie\\
+    \hline
+  \end{tabular}
+\end{center}
+
+\note: Formules trigonométriques:
+
+\vspace{1\baselineskip}
+
+\hspace{-1cm}
+\begin{minipage}{0.45\linewidth}
+  \begin{itemize}[label=$\bullet$]
+  \item $\cos(a+b) = \cos(a) \cos(b) - \sin(a)\sin(b)$
+  \item $\cos(a-b) = \cos(a) \cos(b) + \sin(a)\sin(b)$
+  \item $\sin(a+b) = \sin(a) \cos(b) + \sin(b)\cos(a)$
+  \item $\sin(a-b) = \sin(a) \cos(b) - \sin(b)\cos(a)$  
+  \end{itemize}
+\end{minipage}
+\begin{minipage}{0.7\linewidth}
+  \begin{itemize}[label=$\bullet$]
+  \item $\cos(2a) = \cos^2(a) - \sin^2(a) = 1 - 2\sin^2(a) = 2\cos^2(a)-1$
+  \item $\sin(2a) = 2\sin(a) \cos(a)$
+  \end{itemize}
+\end{minipage}
+
 \subsection{Les fonctions trigonométriques réciproques}
 \subsubsection{L'arccosinus: $\arccos(x)$}
 
@@ -282,7 +317,7 @@ la droite d'équation $y=x$
   \end{tikzpicture}
 \end{center}
 
-\textbf{Propriétés de la fonction arcsinus: }
+\textbf{Propriétés de la fonction arctan: }
 \begin{itemize}[label=$\bullet$, leftmargin=2cm]
 \item $\arctan$ est continue sur  $\R$
 \item $\arctan$ est dérivable sur $\R$ et
@@ -292,6 +327,48 @@ la droite d'équation $y=x$
   \]
 \item $\arctan$ est croissante sur $\R$
 \end{itemize}
+
+\subsection{Croissances comparées}
+On rappelle les formules de croissance comparées sans preuve:
+
+\begin{enumerate}[label=(\alph*)]
+\item $\forall \alpha>0, \forall \beta>0 \quad \lim \limits_{x \to +\infty}
+  \frac{(\ln(x))^{\alpha}}{x^{\beta}} = +\infty$ \qquad et \qquad$\lim \limits_{x \to 0}
+  x^{\beta} |\ln(x)|^{\alpha} = 0$
+\item $\forall \alpha>0, \forall \beta>0 \quad \lim \limits_{x \to +\infty}
+  \frac{(\e^{\alpha x)}}{x^{\beta}} = +\infty$ \qquad et \qquad $\lim \limits_{x \to -\infty}
+   |x|^{\beta} \e^{\alpha x} = 0$  
+\end{enumerate}
+
+\newpage
+\appendix
+\section{Formulaire dérivées}
+\begin{center}
+  \renewcommand{\arraystretch}{3} %donne la distance entre les lignes%
+  \begin{tabular}{|l|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+    \hline
+    $f(x)$ & $x^{\alpha}$ & $\frac{1}{x}$ & $\sqrt{x}$ & $\ln(x)$ & $\e^x$\\
+    \hline
+    $f'(x)$ & $\alpha x^{\alpha-1}$ & $-\frac{1}{x^2}$ & $\frac{1}{2\sqrt{x}}$ 
+            & $\frac{1}{x}$ & $\e^x$\\
+    \hline
+  \end{tabular}
+\end{center}
+
+\tiny
+\begin{center}
+  \renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+  \begin{tabular}{|l|C{1cm}|C{1cm}|C{2.5cm}|C{1cm}|C{1cm}|C{1cm}|}
+    \hline
+    $f(x)$ & $\cos(x)$ & $\sin(x)$ & $\tan(x)$ & $\arcsin(x)$ & $\arccos(x)$ & $\arctan(x)$\\
+    \hline
+    $f'(x)$ & $-\sin(x)$ & $\cos(x)$ & $\frac{1}{\cos^2(x)}=1+\tan^2(x)$ 
+            & $\frac{1}{\sqrt{1-x^2}}$ & $\frac{-1}{\sqrt{1-x^2}}$ & $\frac{1}{1+x^2}$\\
+    \hline
+  \end{tabular}
+\end{center}
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "Seance1_3"

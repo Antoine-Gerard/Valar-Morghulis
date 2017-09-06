@@ -21,6 +21,7 @@
 \usepackage{pgfplots}
 \usepackage{ntheorem}
 \usepackage{eurosym}
+\usepackage{array,multirow,makecell}
 \def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
 \makeatletter
 \def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
@@ -28,6 +29,9 @@
 \def\verticaltext#1{\rotatebox[origin=c]{-90}{\catcode`\~=13\def~{\vbox to 0.33em{}}\parseletters{#1}}}
 
 
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
 
 \theoremstyle{break}
 \newtheorem{mydef}{Définition}[section]
