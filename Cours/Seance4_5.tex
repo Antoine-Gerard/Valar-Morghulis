@@ -1,0 +1,235 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{hyperref}
+\usepackage{algorithm2e}
+\usepackage{fullwidth}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{bbold}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usepgfplotslibrary{fillbetween}
+\usepackage{ntheorem}
+\usepackage{eurosym}
+\usepackage{array,multirow,makecell}
+\def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
+\makeatletter
+\def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
+\makeatother
+\def\verticaltext#1{\rotatebox[origin=c]{-90}{\catcode`\~=13\def~{\vbox to 0.33em{}}\parseletters{#1}}}
+
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\theoremstyle{break}
+\newtheorem{mydef}{Définition}[section]
+\newtheorem{theo}{Théorème}[section]
+\newtheorem*{Rem}{Remarque}
+\newtheorem*{Proof}{preuve:}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\e}{e} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\newcommand{\scal}[2]{\left\langle {#1} , {#2} \right\rangle}
+
+\newcommand{\J}[1]{\mathcal{J}(#1)}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
+
+\begin{document}
+\section{Intégration}
+\subsection{Introduction: }
+Si f est une fonction positive, continue sur un intervalle [a,b], on
+peut l'approcher avec des fonctions en escalier et donner ainsi un
+sens à ``l'aire sous la courbe''. On définit alors
+\[
+  \int \limits_{a}^{b} f(x) dx
+\]
+comme l'aire sous la courbe représentative de f.
+
+\begin{center}
+  \includegraphics[scale=0.4]{Integrale}
+\end{center}
+
+Toute fonction réelle continue f sur un intervalle [a,b] s'écrit comme
+la différence de deux fonctions positives continues, à savoir $f^+(x)
+= \max \limits_{x \in [a,b]} (f(x),0)$ et $f^-(x)
+= \max \limits_{x \in [a,b]} (-f(x),0)$. Ainsi, nous pouvons définir
+la notion d'intégrale pour une fonction f continue sur $[a,b]$:
+\[
+  \int \limits_{a}^b f(x)dx = \int \limits_a^b f^+(x) dx -
+  \int \limits_a^b f^-(x) dx
+\]
+
+\note  Faire un schéma pour une fonction qui change de signe
+
+\subsubsection{Propriétés de l'intégrale: }
+\textbf{Relation de Chasles: } Pour tout c dans l'intervalle $[a,b]$,
+on a :
+\[
+  \int \limits_a^b f(x) dx = \int \limits_a^c f(x) dx
+  + \int \limits_c^b f(x) dx
+\]
+
+\textbf{Opérations algébriques: }
+\begin{enumerate}[label = (\alph*)]
+\item Si f et g sont continues sur [a,b] alors :
+  \[
+    \int \limits_a^b f(x)+g(x)dx
+    = \int \limits_a^b f(x) dx + \int \limits_a^b g(x) dx
+  \]
+\item Si f est continue sur [a,b] et $\lambda \in \R$ alors:
+  \[
+    \int \limits_a^b \lambda f(x) dx
+    = \lambda \int \limits_a^b f(x) dx 
+  \]
+\end{enumerate}
+
+\note Ceci se prouve facilement pour les fonctions constantes. Ensuite
+on étend aux fonctions en escalier et enfin le passage à la limite
+prouve le cas général.
+
+Si f est continue et $b<a$ on a:
+\[
+  \int \limits_a^b f(x) dx
+  = - \int \limits_b^a f(x) dx 
+\]
+
+\subsubsection{Primitive d'une fonction: }
+\begin{mydef}
+  Soient f et F deux fonctions continues un intervalle $I=[a,b]$. On
+  dit que \textbf{F est une primitive de f sur I} si F est dérivable
+  sur I et F'=f 
+\end{mydef}
+
+\begin{theo}[Théorème fondamental du calcul intégral]
+  Soit f une fonction continue sur un intervalle ouvert I=(a,b) de
+  $\R$, à valeurs réelles, et soient $c<d$ deux points de I.
+  \begin{enumerate}[label = (\alph*)]
+  \item La fonction
+    \[
+      F: I ~ \rotatebox[origin=c]{180}{$\in$} ~ x \mapsto \int
+      \limits_a^x f(t) dt
+    \]
+    est une primitive de f sur I: c'est la primitive de la fonction f
+    s'annulant en a.
+  \item Pour toute primitive G de f sur I, on a:
+    \[
+      \int \limits_c^d f(x)dx = G(d) - G(c)
+    \]
+  \end{enumerate}
+\end{theo}
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[enlargelimits=0.1
+      xmin = -1,
+      xmax =  1,
+      ymin = 0,
+      ymax =  2.1,
+      xtick = {0.2},
+      xticklabels = {$x_0$},
+      ticklabel style = {font=\tiny , below},
+      extra x ticks = {0.3},
+      extra x tick labels = {$x_0+h$},
+      extra x tick style = {tick label style={font=\tiny ,
+          xshift=0.2cm, yshift = 0.04cm}},
+      axis x line= center,
+      axis y line= center,
+      legend pos = south east
+      ]
+      \addplot[domain=-.15:1.05,blue, thick] {-x^2+2};
+
+      \node at (axis cs:0.9,1) [anchor=west]
+      {$\color{blue}{f}$};
+      
+      \addplot[name path=f,domain=0.2:0.3,blue] {-x^2+2};
+      
+      \path[name path=axis] (axis cs:0.2,0) -- (axis cs:0.3,0);
+      
+      \addplot [thick,color=blue,pattern = north east lines]
+      fill between [ of=f and axis];
+
+      \addplot [mark=none] coordinates {(0.2,0) (0.2,{-0.2^2+2})};
+      \addplot [mark=none] coordinates {(0.3,0) (0.3,{-0.3^2+2})};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+\note On pourra remarquer en regarder la figure ci-dessus que l'aire
+entre $x_0$ et $x_0+h$ est environ $h*f(x_0)$ et donc plus h ``devient
+petit'' plus le quotient $\frac{F(x_0+h) - F(x_0)}{h}$ est proche de
+$f(x_0)$
+
+\textbf{Conséquences}
+\begin{enumerate}[label=(\alph*)]
+\item Toute fonction continue admet une primitive sur un intervalle.
+\item Si F est une primitive de f, alors pour tout c $\in \R,
+  \tilde{F}(x) = F(x) + c$ est aussi une primitive de f. On note
+  \[
+    \int f(x) dx
+  \]
+  pour désigner une primitive de f
+\item Si on connaît une primitive de f, alors l'aire $\int \limits_a^b
+  f(x) dx$ se calcule comme $F(b) - F(a)$
+\end{enumerate}
+
+\textbf{Primitives à connaître: }
+\begin{center}
+\renewcommand{\arraystretch}{3} %donne la distance entre les lignes%
+  \begin{tabular}{|l|C{2.5cm}|C{2.5cm}|}
+    \hline
+    $f(x)$ & $F(x)$ & $f'(x)$\\
+    \hline
+    0 & $c \in \R$ & 0\\
+    \hline
+    $x^{\alpha}, \alpha \neq -1 $ & $\frac{x^{\alpha+1}}{\alpha+1} + c $
+                                  & $ (\alpha-1)x^{\alpha-1}$  \\
+    \hline
+    $\frac{1}{x}$ & $\ln(|x|) + c $ & $ \frac{-1}{x^2}$ \\
+    \hline
+    $\e^x$ & $\e^x + c$ & $e^x$ \\
+    \hline
+    $\cos(x)$ & $\sin(x) + c$ & $\-sin(x)$ \\
+    \hline
+    $\sin(x)$ & $-\cos(x) + c$ & $\cos(x)$ \\
+    \hline
+    $\tan(x)$ & $-\ln(\cos(x)) + c$ & $\frac{1}{\cos^2(x)}$\\
+    \hline
+    $\frac{1}{1+x^2}$ & $\arctan(x) + c$ &\\
+    \hline
+    $\frac{1}{\sqrt{1-x^2}}$ & $\arcsin(x) + c$ &\\
+    \hline
+    $\frac{-1}{\sqrt{1-x^2}}$ & $\arccos(x) + c$ &\\
+    \hline
+  \end{tabular}
+\end{center}
+
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
