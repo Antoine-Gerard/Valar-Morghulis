@@ -53,6 +53,7 @@
 
 \newcommand{\J}[1]{\mathcal{J}(#1)}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\p}{\mathbb{P}}
 
 \newcounter{exem}
 \setcounter{exem}{1}
@@ -64,10 +65,12 @@
 \begin{document}
 
 \tableofcontents
-
 \chapter{Expérience aléatoires, probabilités et probabilités conditionnelles.}
 
 \textbf{Mots clés: } Expérience aléatoire, probabilités,... .
+
+\note Reformuler le cours en faisant entrer en jeu la définition d'un
+espace probabilisé. 
 
 \section{Vocabulaire, définitions et exemples:}
 
@@ -181,7 +184,7 @@ figures: Valet, Dame, Roi.
 \end{tabular}
 \end{table}
 
-\section{Probabilités}
+\section{Probabilité}
 \textbf{Version lycée}
 \begin{mydef}
   Pour certaines expériences aléatoires on peut, sous certaines conditions,
@@ -231,8 +234,8 @@ de $Omega$ sa \textbf{probabilité théorique} on a :$\mathbb{P}(E_1) =
 \end{prop}
 
 \begin{mydef}
-  Soit $\Omega$ un univers La probabilité d'un événement A inclus dans $\Omega$,
-  noté $\mathbb{P}(A)$ est la somme des probabilités des événemets élémentaires
+  Soit $\Omega$ un univers. La probabilité d'un événement A inclus dans $\Omega$,
+  notée $\mathbb{P}(A)$ est la somme des probabilités des événemets élémentaires
   qui le constitue. Ainsi si $\Omega = \{ e_1, \dots, e_n\}$ et $A = \{e_1, e_3,
   e_{n-1}\}$ alors
   \[
@@ -241,6 +244,168 @@ de $Omega$ sa \textbf{probabilité théorique} on a :$\mathbb{P}(E_1) =
   où $p_i$ est la probabilité de l'événement éléméntaire $\{e_i\}$
    
 \end{mydef}
-\section{Exemples ???}
+
+\begin{prop}
+  Dans une situation \textbf{d'équiprobabilité}, la probabilité d'un
+  événement A est donnée par:
+  \[
+    \mathbb{P}(A) = \frac{|A|}{|\Omega|}
+  \]
+\end{prop}
+
+\begin{mydef}
+  Définir une \textbf{loi de probabilité} sur un univers $\Omega$ c'est associer
+  à chaque \textbf{événement élémentaire} $\{e_i\}$ une probabilité
+  $p_i$ telle que:
+  \begin{enumerate}
+  \item  $0 < p_i < 1$
+  \item $p_1 + p_2 + \dots + p_n = 1$
+  \end{enumerate}
+\end{mydef}
+
+\exemple{Lancé d'un dé truqué}
+
+On considère un dé truqué de telle façon que la probabilité
+d'apparition de chaque face est proportionnelle à la valeur de celle
+ci. Donner la loi de probabilité de cette expérience aléatoire.
+
+L'univers $\Omega$ est composé de 6 issues possible: $\Omega = \{
+1,2,3,4,5,6 \}$. Voici un tableau regroupant la probabilité de chaque
+évenémént élémentaire: 
+
+\begin{center}
+  \begin{tabular}{|L{2cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+    \hline
+    Valeurs de $\omega$ & 1 & 2 & 3 & 4 & 5 & 6 \\
+    \hline
+    $\mathbb{P}(\{ \omega \})$ & a & 2 $\times$ a & 3 $\times$ a & 4 $\times$ a
+                                        & 5 $\times$ a  & 6 $\times$ a \\
+    \hline
+  \end{tabular}
+\end{center}
+
+On doit avoir d'après la définition d'une loi de probabilité $\sum \limits_{i=1}^6 \mathbb{P}(\{ i \}) = 1$ c'est à
+dire:
+\[
+  a + 2a + 3a +4a +5a +6a = 1 \Leftrightarrow 21a = 1 \Leftrightarrow
+  a = \frac{1}{21}
+\]
+
+\begin{prop}
+  Soit  $\Omega$ un univers et $\mathbb{P}$ l'application qui à chaque événement
+  A de $\Omega$ associe sa probabilité. Alors pour tout événement A et
+  B de $\Omega$
+  \begin{enumerate}
+  \item $\mathbb{P}(\overline{A}) = 1 - \mathbb{P}(A)$
+  \item $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) -
+    \mathbb{P}(A \cap B)$
+  \end{enumerate}
+\end{prop}
+
+\begin{theo}[Loi des grands nombres]
+  Lorsqu'on répète une expérience aléatoire un grand nombre de fois,
+  de façon indépendante, la fréquence de réalisation d'un événement
+  tend vers la probabilité d'un événement
+\end{theo}
+
+\note Faire un exemple numérique avec un lancé de dès par exemple. 
+
+\section{Probabilité conditionnelle: }
+\begin{mydef}
+  Soient A un événement tel que $\mathbb{P}(A) > 0$ et B un autre
+  événement. On appelle \textbf{probabilité de} B \textbf{conditionnée} par A ou
+  \textbf{probabilité} de B \textbf{sachant} A le réel, noté
+  $\mathbb{P}_A(B)$, défini par:
+  \[
+    \mathbb{P}_A(B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)}
+  \]
+\end{mydef}
+
+\begin{Rem}
+  Il apparaît tout de suite que $\mathbb{P}_A(A) = 1$
+\end{Rem}
+
+\begin{prop}
+  Soient A et B deux événements distincts. On suppose que
+  $\mathbb{P}(A) > 0$. On a alors les équivalences suivantes:
+  \begin{enumerate}[label = (\arabic*)]
+  \item $\p_A(B) = \p(B)$
+  \item $\p(A \cap B) = \p(A) \p(B)$
+  \item $\p_B(A) = \p(A)$
+  \end{enumerate}
+\end{prop}
+
+\begin{mydef}
+  On dit que deux événements A et B sont indépendants si $\p(A \cap B)
+  = \p(A)\p(B)$
+\end{mydef}
+
+\begin{Rem}
+  Attention, indépendance et incompatibilités sont deux notions
+  différentes. En effet, si A et B sont deux événements, de
+  probabilités non nulles, incompatibles alors $\p(A \cap B) = 0 \neq
+  \p(A) \p(B)$
+\end{Rem}
+
+\note Parler de l'indépendance pour plus de 2 événements ??
+
+\begin{prop}
+  Soient A et B deux événements indépendants. Alors A et $\overline{B}$
+  sont indépendants.
+\end{prop}
+
+\begin{Proof}
+  $\p(A \cap \overline{B}) = \p(A \backslash (A \cap B)) = \p(A) -
+  \p(A \cap B) = \p(A) - \p(A)\p(B) = \p(A)(1-\p(B)) = \p(A) \p(\overline{B})$
+\end{Proof}
+
+\subsection{Résultats de décomposition}
+\begin{prop}
+  Soient A et B deux événements avec $\mathbb{P}(A) > 0$ alors $\p(A
+  \cap B) = \p_A(B) \p(A)$
+\end{prop}
+
+\note Prochaine proposition à faire si on parle avant de Poincaré,
+indépendances de n événements, ... .
+
+\begin{prop}
+  Soit $(A_i)_{1\leq i \leq n}$ une suite finie d'événements tels que
+  $\p(\bigcap \limits_{\scriptscriptstyle{1 \leq i \leq n-1}} A_i) > 0$. On a :
+  \[
+    \p(\bigcap \limits_{1 \leq i \leq n} A_i) = \p(A_1) \p_{A_1}(A_2)
+    \p_{A_1 \cap A_2}(A_3) \dots \p_{A_1 \cap \dots \cap A_{n-1}}(A_n)
+  \]
+\end{prop}
+
+\note A démontrer ...
+
+\subsection{Formule des probabilités totales}
+\begin{mydef}
+  Une famille finie $(A_i)_{1\leq i \leq n}$ d'événements deux à deux
+  incompatibles et tels que $\bigcup \limits_{1 \leq i \leq n} A_i =
+  \Omega$ est appelé \textbf{système complet d'événements}.
+\end{mydef}
+
+\begin{prop}
+  Soit $(A_i)_{1\leq i \leq n}$ un \textbf{système complet
+    d'événements} ayant tous une probabilité stritement
+  positive. Alors :
+  \[
+    \p(A) = \sum \limits_{i=1}^n \p_{A_i}(A)\p(A_i)
+  \]
+\end{prop}
+
+\note Pour la preuve, considérer $A \cap \Omega = \bigcup \limits_{1
+  \leq i \leq n} (A \cap A_i)$
+
+\subsection{Arbres pondérés}
+
+\section{Exercices}
+
+\input{Integrales.tex}
 
 \end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
