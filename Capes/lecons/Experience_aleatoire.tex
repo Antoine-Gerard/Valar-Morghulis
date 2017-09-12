@@ -1,0 +1,246 @@
+\documentclass[a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{hyperref}
+\usepackage{algorithm2e}
+\usepackage{fullwidth}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{bbold}
+\usepackage{pgfplots}
+\usepackage{ntheorem}
+\usepackage{eurosym}
+\usepackage{array,multirow,makecell}
+\def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
+\makeatletter
+\def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
+\makeatother
+\def\verticaltext#1{\rotatebox[origin=c]{-90}{\catcode`\~=13\def~{\vbox to 0.33em{}}\parseletters{#1}}}
+
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\theoremstyle{break}
+\newtheorem{mydef}{Définition}[chapter]
+\newtheorem{theo}{Théorème}[chapter]
+\newtheorem*{Rem}{Remarque}
+\newtheorem*{Proof}{preuve:}
+\newtheorem{lemme}{Lemme}[chapter]
+\newtheorem{prop}{Proposition}[chapter]
+\newtheorem*{propriete}{Propriétés}
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\e}{e} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\newcommand{\scal}[2]{\left\langle {#1} , {#2} \right\rangle}
+
+\newcommand{\J}[1]{\mathcal{J}(#1)}
+\newcommand{\R}{\mathbb{R}}
+
+\newcounter{exem}
+\setcounter{exem}{1}
+
+
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
+\newcommand{\exemple}[1]{\textbf{Exemple \theexem: #1} \addtocounter{exem}{1} }
+
+\begin{document}
+
+\tableofcontents
+
+\chapter{Expérience aléatoires, probabilités et probabilités conditionnelles.}
+
+\textbf{Mots clés: } Expérience aléatoire, probabilités,... .
+
+\section{Vocabulaire, définitions et exemples:}
+
+\begin{mydef}[Expérience aléatoire]
+  On appelle \textbf{expérience aléatoire} une expérience dont on ne peut
+  prévoir le résultat avec certitude. On appelle \textbf{issue} d'une expérience
+  aléatoire un résultat possible de celle-ci. On appelle \textbf{univers}
+  l'ensemble de toutes les issues. Un \textbf{evénement élémentaire} est une
+  partie de l'univers composé d'une seule issue tandis qu'un \textbf{événement}
+  est une partie de l'univers composée de plusieurs issues. 
+\end{mydef}
+
+\exemple{Lancé d'un dé à 6 faces}
+
+Dans cette expérience on jette un dé à 6 faces numérotées de 1 à 6 et l'on
+observe le numéro obtenu. Cette exprérience sera modélisée par
+\textbf{l'univers} $\Omega=\{1,2,3,4,6\}$. Ainsi:
+\begin{itemize}[label = $\bullet$, leftmargin=1cm]
+\item ``1'', ``2'', ``3'', ``4'', ``5'' et ``6'' sont l'ensemble des issues
+  possibles.
+\item A : ``Obtenir un nombre pair'' est un \textbf{événement} que l'on peut
+  aussi modéliser par l'ensemble $\{2,4,6\}$
+\item B : ``Obtenir le nombre 5'' est un \textbf{événement élémentaire} que l'on
+  peut aussi modéliser par l'ensemble $\{5\}$
+\end{itemize}
+
+\exemple{Lancé d'une pièce de monnaie}
+
+Dans cette expérience on lance une pièce de monnaie à 2 faces ``Pile'' et
+``Face'' et on note la face exposée. Ici \textbf{l'univers} $\Omega=\{P,F\}$
+n'est composé que de deux issues: ``Pile'' et ``Face''.
+\begin{itemize}[label = $\bullet$, leftmargin=1cm]
+\item A: ``Le résultat est pile'' et B: ``Le résultat est face'' sont les deux
+  \textbf{événements éléméntaires} de l'expérience. On peut aussi les noter en
+  langage ensembliste de la manières suivante: A=$\{P\}$ et B=$\{F\}$.
+\end{itemize}
+
+\exemple{Tirage d'une carte dans un jeu de 52.}
+
+Ici on tire une carte dans un jeu de 52 (sans joker). Dans ce jeu il y a deux
+couleurs, rouge et noire, quatre familles: Pique, Coeur, Carreau et Trêfle et
+chaque famille est composée de 13 cartes numérotées de 1 à 10 et comprenant 3
+figures: Valet, Dame, Roi.
+\begin{itemize}[label = $\bullet$, leftmargin=1cm]
+\item Il y a 52 \textbf{issues} possibles.
+\item \textbf{L'univers} $\Omega$ est composé des 52 cartes.
+\item A: ``La carte tirée est un As'' est un \textbf{événement} composé de 4 \textbf{issues} (les
+  4 as du jeu).
+\item B: ``La carte tirée est une figure'' est un \textbf{événement} composé de
+  12 \textbf{issues}
+\item C: ``La carte tirée est un 3 de coeur'' est un \textbf{événement élémentaire} composé de
+  une \textbf{issue}
+\end{itemize}
+
+\vspace{1\baselineskip}
+
+\textbf{Analogie du vocabulaire probabiliste avec le langage ensembliste}
+
+
+\begin{table}[h!]
+  \small
+\hspace{-2cm}
+\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+\begin{tabular}{|L{5cm}|L{5cm}|L{1.5cm}|L{5cm}|}
+  \hline
+  Langage probabiliste & Langage des ensembles & Notation & Exemple: lancé d'un
+                                                            dé \\
+  \hline
+  A et un \textbf{événement} & A est une partie de $\Omega$ & $A \subset \Omega$
+                                                            & A: ``Obtenir un
+                                                              nombre pair'':
+                                                              $A=\{2,4,6\}$ \\
+  \hline
+  $ A=\{\omega\}$ est un \textbf{événement élementaire} & $\omega$ appartient à
+                                                          $\Omega$
+   &$\omega \in \Omega$ &  A: ``Obtenir le chiffre 6'' : A=$\{6\}$ \\
+  \hline
+  A est un \textbf{événement certain} & A est l'ensemble $\Omega$ & $A = \Omega$
+                                                          & A: '' Obtenir un
+                                                            chiffre entre 1 et
+                                                            6'': A = $\Omega$\\
+  \hline
+  A est un \textbf{évenement impossible} & A est l'ensemble vide & $A = \emptyset$
+                                                        & A: ``Obtenir le
+                                                          chiffre 7'' \\
+  \hline
+  B est \textbf{l'événement contraire} de A & B et A sont complémentaires
+                                            & $\scriptstyle{B = \overline{A} = \Omega
+                                              \backslash A}$
+                                            & A: ``Obtenir un nombre pair'', B: ``Obtenir
+                                              un nombre impair'' \\
+  \hline
+  A implique B & A est inclus dans B & $A \subset B$ & A:''Obtenir le chiffre
+                                                       2'', B : ``Obtenir un
+                                                       chiffre pair'' \\
+  \hline
+  E est l'évenement A ou B & E est l'union de A et B & E=$A \cup B$ & A: ``Obtenir un nombre pair'' B: ``Obtenir 1''
+                                    \color{red}{E}: ``Obtenir un nombre pair ou le
+                                    chiffre 1'' \\
+  \hline
+  E est l'événement A et B & E est l'intersection de A et B & $E = A \cap B$
+                           &  A: ``Obtenir un nombre pair'', B: ``Obtenir un multiple de 3''
+                             \color{red}{E}: ``Obtenir un nombre pair et un
+                             un multiple de 3'' = ``Obtenir 6'' \\
+  \hline
+  A et B sont incompatibles & l'intersection de A et B est vide & $A \cap B =
+                                                                  \emptyset$
+                            & A: ``Obtenir un chiffre pair'', B: ``Obtenir un
+                              chiffre impair''\\
+  \hline
+\end{tabular}
+\end{table}
+
+\section{Probabilités}
+\textbf{Version lycée}
+\begin{mydef}
+  Pour certaines expériences aléatoires on peut, sous certaines conditions,
+  déterminé la ``chance'' qu'un événement A à pour se réaliser. C'est ce que l'on
+  appelle la \textbf{probabilité} ou \textbf{probabilité théorique} de
+  l'événement A.
+
+  De manière plus générale, si on note $\Omega = \{e_1, \dots, e_n\}$ l'univers
+  d'une expérience aléatoire alors chaque issue possible $e_i$ est affectée
+  d'une \textbf{probabilité}, c'est à dire un nombre $p_i$ tel que:
+  \[
+    0 < p_i < 1 \quad \text{ et } \quad p_1 + p_2 + \dots + p_n = 1
+  \]
+\end{mydef}
+
+\exemple{}
+
+Reprenons l'exemple du lancé d'un dé parfaitement équilibré, c'est à dire que
+chaque face à la même chance d'apparaître. On dit dans ce cas que le dé est non
+pipé ou encore non truqué. L'univers de l'expérience est $\Omega: \{1, 2, 3, 4,
+5, 6\}$. Chaque face à donc la même \textbf{probabilité théorique}
+d'apparaître, à savoir 1 chance sur 6.
+
+Si on note $E_1 :=$ "Obtenir la face 1", on a $E_1=\{1\}$ et si on note
+$\mathbb{P}$ l'application de $\Omega$ dans $\R+$ qui associe à chaque événement
+de $Omega$ sa \textbf{probabilité théorique} on a :$\mathbb{P}(E_1) =
+\frac{1}{6} $
+
+\begin{Rem}
+  La probabilité d'un événement A est un nombre réel compris entre 0 et 1 que
+  l'on note généralement:
+  \begin{itemize}
+  \item Sous la forme fractionnaire.
+  \item Sous la forme d'un pourcentage.
+  \item Sous la forme d'un nombre décimal (généralement arrondi)
+  \end{itemize}
+\end{Rem}
+
+\begin{mydef}
+  On est dans une situation \textbf{d'équiprobabilité} si toutes les issues de
+  l'expérience aléatoire ont la même probabilité. 
+\end{mydef}
+
+\begin{prop}
+  Dans une \textbf{situation d'équiprobabilité} avec un univers à n éléménts,
+  la  \textbf{probabilité} de chaque événément élémentaire est $p_i = \frac{1}{n},~ i \in \{1,\dots,n\}$
+\end{prop}
+
+\begin{mydef}
+  Soit $\Omega$ un univers La probabilité d'un événement A inclus dans $\Omega$,
+  noté $\mathbb{P}(A)$ est la somme des probabilités des événemets élémentaires
+  qui le constitue. Ainsi si $\Omega = \{ e_1, \dots, e_n\}$ et $A = \{e_1, e_3,
+  e_{n-1}\}$ alors
+  \[
+    \mathbb{P}(A) = p_1 + p_3 + p_{n-1}
+  \]
+  où $p_i$ est la probabilité de l'événement éléméntaire $\{e_i\}$
+   
+\end{mydef}
+\section{Exemples ???}
+
+\end{document}
