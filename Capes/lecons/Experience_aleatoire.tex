@@ -22,6 +22,11 @@
 \usepackage{ntheorem}
 \usepackage{eurosym}
 \usepackage{array,multirow,makecell}
+\usepackage{cancel}
+
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
 \def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
 \makeatletter
 \def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
