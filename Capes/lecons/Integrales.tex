@@ -304,8 +304,40 @@ l'hypographe est la partie du plan délimitée par:
   \end{enumerate}
 \end{Rem}
 
-\exemple{}
+\exemple{La fonction $f: x \mapsto 3x$}
 
+\begin{minipage}{0.45\linewidth}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width = 8cm,
+        height = 6cm,
+        xmax = 3,
+        xmin = -1,
+        ymin = -1,
+        ymax = 7,
+        xtick = {1, 3},
+        ytick distance = 1,
+        axis x line= center,
+        axis y line= center        
+        ]
+        \addplot[domain=0:2, samples=20, fill=orange!50!white] {3*x}\closedcycle;
+        \addplot[domain=2:3, samples=20] {3*x};
+        \node at (axis cs: 2,0) [below] {\small A};
+        \node at (axis cs: 0,0) [below right] {\small O};
+        \node at (axis cs: 2,6) [below right] {\small B};
+      \end{axis}
+    \end{tikzpicture}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+  $\int_0^2 f(x)dx$ est en unité d'aire, l'aire du triangle $AOB$.
+  \[
+    \mathcal{A}(AOB) = \frac{b \times h}{2} = \frac{2 \times 6}{2} = 6 \mathbf{u.a}
+  \]
+  Ainsi $\int_0^2 f(x)dx = 6$
+\end{minipage}
 \subsection{Intégrale d'une fonction continue négative: }
 \begin{mydef}
   On appelle \textbf{épigraphe} d'une fonction f défini sur un
@@ -395,8 +427,32 @@ l'épigraphe est la partie du plan délimitée par:
     \forall \varepsilon > 0, ~ \exists \eta>0,~\big( \forall h ~ |h| < \eta
     \Rightarrow |T_h(F) - f(x)|<\varepsilon \big) 
   \]
-  
+
+  Ainsi, $\lim \limits_{h \to 0} T_h(F)(x) = f(x)$
 \end{Proof}
+
+\section{Propriétés algébriques des intégrales}
+Soient f et g deux fonctions continues sur un intervalle $[a,b]$. Nous avons les
+propriétés suivantes: 
+
+\textbf{Linéarité: }
+\[
+  \int_a^b f(x) + g(x) dx = \int_a^b f(x) dx + \int_a^b g(x)dx
+\]
+L'intégrale de la somme est la somme des produits.
+
+Pour tout réel k nous avons:
+\[
+  \int_a^b kf(x)dx = k\int_a^b f(x)dx
+\]
+
+\begin{prop}{Relation de Chasles}
+  Soit f une fonction continue sur un intervalle I. Soient a, b et soit c des
+  élement de I. On a :
+  \[
+    \int_a^b f(x) dx = \int_a^c f(x)dx + \int_c^b f(x)dx
+  \]
+\end{prop}
 
 %%% Local Variables:
 %%% mode: latex
