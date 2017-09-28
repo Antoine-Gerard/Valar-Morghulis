@@ -1,0 +1,95 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{hyperref}
+\usepackage{algorithm2e}
+\usepackage{fullwidth}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{bbold}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usepgfplotslibrary{fillbetween}
+\usepackage{ntheorem}
+\usepackage{eurosym}
+\usepackage{array,multirow,makecell}
+\def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
+\makeatletter
+\def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
+\makeatother
+\def\verticaltext#1{\rotatebox[origin=c]{-90}{\catcode`\~=13\def~{\vbox to 0.33em{}}\parseletters{#1}}}
+
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\theoremstyle{break}
+\newtheorem{mydef}{Définition}[section]
+\newtheorem{theo}{Théorème}[section]
+\newtheorem*{Rem}{Remarque}
+\newtheorem*{Proof}{preuve:}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\e}{e} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\newcommand{\scal}[2]{\left\langle {#1} , {#2} \right\rangle}
+
+\newcommand{\J}[1]{\mathcal{J}(#1)}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
+
+\begin{document}
+\section{Dérivées successives et Développement limités}
+
+\subsection{Dérivées successives et polynôme de Taylor}
+\begin{mydef}[Dérivées successives]
+  Soit $f: I \mapsto \R$ une fonction. Pour tout $n \in \mathbb{N}*$ on définit
+  les \textbf{dérivées successives} de f de proche en proche (par récurrence)
+  par: pour $x_0 \in I$, la dérivée n-ième de $f$, notée $f^{(n)}(x_0)$, est
+  ,si elle existe, la dérivée de $f^{(n-1)}(x_0)$. On dit alors que f est n fois
+  dérivable sur I si $f^{(n)}$ existe sur I. 
+\end{mydef}
+
+\begin{mydef}[Formules de Taylor du 1er et deuxième ordre]
+  Soit f une fonction dérivable tel que f' soit continue. On a alors la formule
+  de Taylor du 1er ordre avec reste intégrale suivante:
+  \[
+    f(x_0+h) = f(x_0) + \int_{x_0}^{x_0+h} f'(t) dt = \color{red}{f(x_0) + hf'(x_0) +
+    h\varepsilon(h) }
+  \]
+
+  Si f est deux fois dérivable et que $f''$ est continue on a la formule de
+  Taylor d'ordre 2 suivante:
+  \[
+    f(x_0+h) = f(x_0) + hf'(x_0) + \int_{x_0}^{x_0+h} (x_0+h-t) f''(t) dt = \color{red}{f(x_0)
+    + hf'(x_0) + \frac{h^2}{2} f''(x_0)+ h^2 \varepsilon(h) }
+  \]
+  où $\varepsilon(h)$ tend vers 0 lorsque h tend vers 0
+\end{mydef}
+
+\note On voit ici que si f est deux fois dérivable alors on peut ``localement
+approcher'' f par un polynôme du second degré avec une erreur qui sera
+négligeable devant $h^2$. Par exemple, si $h=\frac{1}{1000}$ la formule de
+Taylor d'ordre 1 nous donne une erreur qui sera négligeable devant $h
+=\frac{1}{1000}$ tandis que la formule d'ordre 2 nous donne une erreur
+négligeable devant $h^2 = \frac{1}{1.000.000}$
+\end{document}
