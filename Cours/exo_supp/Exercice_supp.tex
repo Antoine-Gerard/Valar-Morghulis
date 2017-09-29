@@ -1,0 +1,436 @@
+\documentclass{article}% autres choix : report, book
+\usepackage[utf8]{inputenc}% encodage du fichier source
+\usepackage[T1]{fontenc}% gestion des accents (pour les pdf)
+\usepackage[francais]{babel}% rajouter éventuellement english, greek, etc.
+\usepackage{textcomp}% caractères additionnels
+\usepackage{amsmath,amssymb,amsthm}% pour les maths
+\usepackage{pxfonts}% remplacer éventuellement par txfonts, fourier, etc.
+\usepackage[a4paper]{geometry}% taille correcte du papier
+\usepackage{graphicx}% pour inclure des images
+\usepackage{xcolor}% pour gérer les couleurs
+\usepackage{microtype}% améliorations typographiques
+\usepackage{hyperref}% gestion des hyperliens
+\usepackage{answers}
+\usepackage{tikz, tkz-tab}
+%\usepackage{ntheorem}
+
+\hypersetup{pdfstartview=XYZ}% zoom par défaut
+
+
+\newenvironment{questions}{\begin{enumerate}}{\end{enumerate}}
+\newenvironment{sousquestions}{\begin{enumerate}}{\end{enumerate}}
+\newcommand{\R}{\mathbb{R}}
+\pagestyle{empty}
+
+\newtheorem{Exc}{EXERCICE}
+\Newassociation{correction}{Soln}{mycor}
+\renewcommand{\Solnlabel}[1]{CORRIGE #1}
+\def\exo#1{%
+  \futurelet\testchar\MaybeOptArgmyexoo}
+\def\MaybeOptArgmyexoo{
+  \ifx[\testchar \let\next\OptArgmyexoo
+  \else \let\next\NoOptArgmyexoo \fi \next}
+\def\OptArgmyexoo[#1]{%
+  \begin{Exc}[#1]\normalfont}
+  \def\NoOptArgmyexoo{%
+    \begin{Exc}\normalfont}
+    \newcommand{\finexo}{\end{Exc}}
+  \newcommand{\flag}[1]{}
+  \newif\ifprof
+  \newcommand{\entete}[1]
+
+
+ 
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
+\DeclareMathOperator{\e}{e} %exponentielle
+
+\begin{document}
+
+\Opensolutionfile{mycor}[TD_correc]
+
+\proftrue
+
+\tableofcontents
+\clearpage
+
+\newpage
+
+\begin{center}
+  \textbf{Feuille de TD supplémentaire}
+\end{center}
+
+\section{Continuité, Dérivation, fonctions usuelles}
+
+\exo{}[Calculer les dérivées  des fonctions suivantes]
+\begin{align*}
+    1) f(x) =& (3x^2+7)\ln(x)   & 2) f(x) =& \frac{e^x}{x^2+1} & 3) f(x) =& \sqrt{x^4+8} \\
+    4) f(x) =& \cos(2-x)   & 5) f(x) =& \ln(7-x^2)
+                           & 6) f(x) =& (\sin(x) + 3)^4\\
+    7) f(x) =& 3x^2 \ln(x) & 8)f(x) =& \e^{\sqrt{x}}  & 9) f(x) =& \arccos(\arctan(x)) 
+\end{align*}
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}[Corrigé exercice 2]
+  \begin{align*}
+    1) f'(x) =& \frac{(3x^2+7)}{x} + 6x \ln(x)
+    & 2) f'(x) =& \frac{e^x (x^2 + 1 - 2x)}{(x^2+1)^2} = \frac{e^x(x-1)^2}{(x^2+1)^2}
+    & 3) f'(x) =& \frac{4x^3}{2\sqrt{x^4+8}} = \frac{2x^3}{\sqrt{x^4+8}}\\
+    4) f'(x) =& \sin(2-x)
+    & 5) f'(x) =& \frac{-2x}{7-x^2}
+    & 6) f'(x) =& 4 \cos(x) (\sin(x) + 3)^3 \\
+    7) f'(x) =& 6x \ln(x) + \frac{3x^2}{x} = 6x \ln(x) + 3x
+    & 8)f'(x) =& \frac{ e^{ \sqrt{x} }}{ 2\sqrt{x} }
+    & 9)f'(x) =& \frac{1}{1+x^2} \frac{-1}{ \sqrt{ 1 - \arctan^2(x) } }
+  \end{align*}
+\end{correction}
+\fi
+\finexo
+
+\exo{}[Calculer les limites en utilisant la définition de la dérivée]
+\[
+\lim  \limits_{ x \to -\frac{\pi}{2} } \frac{ \cos(x) }{ x + \frac{\pi}{2}},
+\qquad \lim  \limits_{ x \to \frac{\pi}{3} }\frac{ \sin(x)-\frac{\sqrt{3}}{2} }{x-\frac{\pi}{3}},
+\]
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  \begin{align*}
+    &1) \lim \limits_{x \to -\frac{\pi}{2}}
+      \frac{\cos(x)}{x+\frac{\pi}{2}} = \lim \limits_{x \to -\frac{\pi}{2}}
+      \frac{\cos(x)-\cos(\frac{-\pi}{2})}{x-(-\frac{\pi}{2})}
+      = (\cos(x))'_{|x=-\frac{\pi}{2}} = 1 \\
+    \\
+    &2) \lim \limits_{x \to \frac{\pi}{3}}
+      \frac{\sin(x)-\frac{\sqrt{3}}{2}}{x-\frac{\pi}{3}}
+      = \lim \limits_{x \to \frac{\pi}{3}}
+      \frac{\sin(x)-\sin(\frac{\pi}{3})}{x-\frac{\pi}{3}}
+      = (\sin(x))'_{|x=\frac{\pi}{3}} = \frac{1}{2} \\
+  \end{align*}
+\end{correction}
+\fi
+\finexo
+
+\exo{}[Etude de $\arccos(x) + \arcsin(x)$]
+~\\
+Dans cette exercice on se propose d'étudier la fonction:
+\[
+  \begin{array}{cccccc}
+     f & : & [-1,1] & \to & \R \\ 
+       & & x & \mapsto & \arccos(x) + \arcsin(x) \\
+  \end{array}
+\]
+\begin{enumerate}
+\item Montrer que f est dérivable sur $]-1,1[$
+\item Calculer $f'(x)$ pour tout x de $]-1,1[$
+\item Calculer $f(0)$
+\item Conclure
+\end{enumerate}
+
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~ \\
+  \begin{enumerate}
+  \item f est la somme de deux fonctions dérivables sur $]-1,1[$ donc f est
+    dérivable sur $]-1,1[$
+  \item $f'(x) = \frac{-1}{\sqrt{1-x^2}} + \frac{1}{\sqrt{1-x^2}} = 0$
+  \item $f(0) = \frac{\pi}{2} + 0 = \frac{\pi}{2}$
+  \item $f'(0)= 0$ sur l'intervalle $]-1,1[$ donc f est constante sur $[-1,1]$
+    et on a
+    \[
+      \forall x \in [-1,1] \qquad f(x) = \arccos(x) + \arcsin(x) = \frac{\pi}{2} = f(0)
+    \]
+  \end{enumerate}
+\end{correction}
+\fi
+\finexo
+
+\exo{}
+~\\
+Étudier la suite $u_n = (1+\frac{1}{n})^n$ en exprimant $u_n$ à l'aide
+de $\ln(.)$ et $\exp(.)$ et en posant $n=\frac{1}{x}$.
+
+\note: On pourra découper l'exercice comme suit:
+\begin{enumerate}
+\item Montrer que $u_n = g(\frac{1}{n})$ avec g une fonction dont on
+  précisera l'ensemble de définition. (Indications: poser $x = \frac{1}{n}$)
+\item Donner l'ensemble de dérivabilité de g et donner sa dérivée sur
+  cet ensemble.
+\item Soit $x \in ]0,+\infty[$. Donner le tableau de variations de $x \ln(x) - x$.
+\item Dresser le tableau de variation de g. 
+\item Conclure quant à $u_n$ (Sens de variation, limite)
+\end{enumerate}
+
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~ \\
+  On pose $x=\frac{1}{n}$ et on étudie la fonction
+  \[
+    \begin{array}{cccccc}
+      g & : & ]0,1] & \to & \R \\ 
+        & & x & \mapsto & (1+x)^{\frac{1}{x}} = \e^{\frac{\ln(1+x)}{x}} \\
+    \end{array}
+  \]
+
+  On a $u_n = g(\frac{1}{n})$. $g$ est dérivable sur $]0,1]$ et
+  \[
+    g'(x) = \e^{\frac{\ln(1+x)}{x}} \Big( -\frac{\ln(1+x)}{x^2} +
+            \frac{1}{x(1+x)} \Big) 
+          = \e^{\frac{\ln(1+x)}{x}} \Big( \frac{-(x+1)\ln(1+x) +
+            x}{x^2(1+x)} \Big)
+  \]
+
+  Étude de $f : x \mapsto x\ln(x) - x$ sur $]0,+\infty[$
+  \begin{center}
+    \begin{tikzpicture}
+      \tkzTab{$x$ / 1 , $f'(x)=\ln(x)$ / 1, $f(x)$ / 1.5}{$0$,
+        $1$, $+\infty$}{, -, z, +, }{+C /$0$ , -/ -1, +/ $+\infty$}
+    \end{tikzpicture}
+  \end{center}
+
+  Ainsi on peut conclure que $\forall x \in \R^+_*,~ x\ln(x) \geq
+  x-1$. Donc si on revient à $g'(x)$ on a $(x+1) \ln(1+x) \geq x
+  ~\forall x \in ]0,1]$ et donc $x - (x+1) \ln(1+x) <=0$. D'où:
+  \begin{center}
+    \begin{tikzpicture}
+      \tkzTabInit{$x$ / 1 , $f(x)$ / 1.5}{$0$,$1$}
+      \tkzTabVar{+C / $\e^1$, -/ 2}
+    \end{tikzpicture}
+  \end{center}
+
+  Ainsi puisque $u_n = g(\frac{1}{n})$ on a $u_n \leq u_{n+1} \quad (\frac{1}{n}>\frac{1}{n+1})$ et
+  $\lim \limits_{n \to \infty} = e^1$
+\end{correction}
+
+\fi
+\finexo
+
+\newpage
+\section{Intégration}
+\exo{}
+~\\
+\begin{questions}
+\item Calculer en effectuant le changement de variable x = cos(t)
+  \[
+    I = \int_{-1}^{1} \sqrt{1-x^2} dx \qquad \text{\textbf{Indication:
+      } $\cos^2(t) + \sin^2(t) = 1$ et $\sin^2(t) = \frac{1-\cos(2t)}{2}$}
+  \]
+\item Calculer en effectuant le changement de variable  $t = \sqrt(x)$
+  \[
+    I = \int_{1}^{4} \frac{1-\sqrt{x}}{\sqrt{x}} dx
+  \]
+\item Calculer en effectuant le changement de variable  $t = \ln(x)$
+  \[
+    I = \int_{1}^{\e^1} \frac{(\ln(x))^n}{x} dx
+  \]
+\item Calculer en effectuant le changement de variable  $t = \sqrt{e^x}$
+  \[
+    I = \int_{0}^{\ln(3)} \frac{\e^x}{(e^x+1)\sqrt{e^x}} dx
+  \]
+\item Calculer en effectuant une I.P.P.
+  \[
+    \int_0^{\pi} x \sin(x) dx
+  \]
+\item Calculer en effectuant une I.P.P.
+  \[
+    \int_0^{\frac{\pi}{2}} x \cos(x) dx
+  \]
+\item Calculer en effectuant une I.P.P. et la question 5)
+  \[
+    \int_0^{\pi} x^2 \cos(x) dx
+  \]
+\item Calculer en effectuant une I.P.P. la primitive de $\arctan(x)$
+  (\textbf{Indications: } Poser $u(x) = \arctan(x)$ et $v'(x) = 1$)
+\item Calculer en effectuant une I.P.P.
+  \[
+    \int_0^{\pi} \cos(x) \e^x \qquad (\text{\textbf{Indications: }
+      effectuer l'I.P.P deux fois)}
+  \]
+\end{questions}
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~\\
+  \begin{questions}
+  \item $x = \cos(t) \Rightarrow dx = -\sin(t)dt$
+    Ainsi:
+    \[
+      \int_{-1}^{1} \sqrt{1-x^2} dx
+      = \int_{\pi}^{0} \sqrt{1-\underbrace{\cos^2(t)}_{x=cos(t)}}
+      \times \underbrace{-\sin(t) dt}_{dx} 
+    \]
+
+    Lorsque $x=-1$ on a $t = \arccos(-1) = \pi$ et lorsque $x=1$ on a
+    $t=\arccos(1) = 0$. D'où les nouvelles bornes de l'intégrale.
+    Et donc:
+    \begin{eqnarray*}
+      \int_{-1}^{1} \sqrt{1-x^2} dx = \int_0^{\pi} \sin^2(t) dt
+      &=& \int_0^{\pi} \frac{1 - \cos(2t)}{2}dt \text{ (voir
+          Indication)} \\
+      &=& \frac{1}{2}\big[ t - \frac{\sin(2t)}{2} \big]_0^{\pi}\\
+      &=& \frac{\pi}{2}
+    \end{eqnarray*}
+  \end{questions}
+\end{correction}
+\fi
+\finexo
+
+\exo{}
+~\\
+Soient $\lambda, T>0$. Calculer $I(T) = \int_0^T \lambda \e^{-\lambda
+  t} dt$ et $E(T) = \int_0^T  t \lambda \e^{-\lambda t}$
+
+Calculer les limites de $I(T)$ et $E(T)$ lorsque T tend vers $+\infty$
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  \begin{eqnarray*}
+    I(T) &=& \int_0^T \lambda \e^{-\lambda t} dt \\
+         &=& \big[ -e^{\lambda t} \big]_0^T \\
+         &=& -e^{\lambda T} + e^0 \\
+         &=& 1 - e^{-\lambda T}
+  \end{eqnarray*}
+
+  Passons à $E(T)$. Pour cette intégrale on utilise un I.P.P. en posant:
+  \[
+    u(t) = t \qquad \text{ et } \qquad v'(t) = \lambda \e^{-\lambda t} 
+  \]
+
+  Ainsi on trouve,
+  \[
+    u'(t) = 1  \qquad \text{ et } v(t) = -\e^{-\lambda t} 
+  \]
+
+  Et finalement, en utilisant la formule d'I.P.P. ($\int uv'dt = [uv]
+  - \int u'vdt$)
+  \begin{eqnarray*}
+    E(T) &=& \int_0^T t \lambda \e^{-\lambda t} dt \\
+         &=& \big[ -t e^{\lambda t} \big]_0^T - \int_0^T -\e^{-\lambda
+    t}\\
+         &=& T \e^{-\lambda T} - \big[ \frac{ \e^{-\lambda t} }{\lambda} \big]_0^T\\
+         &=& T \e^{-\lambda T} - \frac{\e^{-\lambda T} -
+             \e^0}{\lambda} \\
+         &=& T \e^{-\lambda T} + \frac{1 - \e^{-\lambda T}}{\lambda}
+  \end{eqnarray*}
+
+  Maintenant passons aux limites lorsque $T \to +\infty$
+  \[
+    \lim \limits_{T \to +\infty} I(T) = \lim \limits_{T \to +\infty}
+        (1 - e^{-\lambda T}) = 1 - 0 = 1              
+  \]
+  \[
+    \lim \limits_{T \to +\infty} E(T) = \lim \limits_{T \to +\infty}
+    \lim \limits_{T \to +\infty} T \e^{-\lambda T} + \frac{1 -
+      \e^{-\lambda T}}{\lambda}
+    = \underbrace{ \lim \limits_{T \to +\infty} T \e^{-\lambda
+       T} }_{\text{croissance comparée } = 0}
+   + \lim \limits_{T \to +\infty} \frac{1 - \e^{-\lambda T}}{\lambda}
+   = 0 + \frac{1 - 0}{\lambda} = \frac{1}{\lambda}
+ \]
+
+ \textbf{Remarques: } Pour les gens ayant fait un peu de probabilités
+ on pourra remarquer que la fonction $f: t \mapsto \lambda
+ \e^{-\lambda t}$ n'est
+ rien d'autre que la densité de probabilité de la loi
+ exponentielle. $\lim \limits_{T \to \infty} E(T)$ est en fait
+ l'espérance d'une variable aléatoire suivant la loi exponentielle et
+ il est donc normal de trouver $\frac{1}{\lambda}$. Ainsi si vous
+ essayez de calculer $\lim \limits_{T \to \infty} \int_0^T t^2 \lambda
+ \e^{-\lambda t} dt - \frac{1}{\lambda}^2$ vous devriez trouver $\frac{1}{\lambda^2}$ c'est
+ à dire la variance d'une V.A. suivant la loi exponentielle.  
+\end{correction}
+\fi
+\finexo
+
+\exo{}
+~\\
+Soient $n \in \mathbb{N}$ et $x>0$. On pose:
+\[
+  \mathcal{I}_n(x) = \int_0^x t^n \e^{-t} dt \qquad  \text{ et } \qquad \mathcal{J}_n(x) = \lim
+  \limits_{x \to +\infty} \mathcal{I}_n(x)
+\]
+Établir une relation de récurrence (sur n) vérifiée par $\mathcal{I}_n(x)$. En
+déduire une relation de récurrence vérifiée par $\mathcal{J}_n(x)$. Enfin
+calculer $\mathcal{J}_n(x)$ pour tout $n>0$
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~\\
+  Ici on cherche une relation de réccurence sur n pour
+  $\mathcal{I}_n = \int_0^x t^n \e^{-t} dt$. Pour cela il faudrait
+  faire apparaitre le terme $t^{n-1}\e^{-t}$ dans l'intégrale
+  $\mathcal{I}_n$ c'est à dire dérivée $t^n$. Nous avons une formule
+  qui nous permet d'avoir une relation entre intégrale et dérivée qui
+  est l'I.P.P. Essayons donc l'IPP en posant:
+  \[
+    u(t) = t^n \qquad \text{ et } \qquad v'(t) = \e^{-t}
+  \]
+
+  On a donc:
+  \[
+    u'(t) = n t^{n-1} \qquad \text{ et } \qquad v(t) = -\e^{-t}
+  \]
+  
+  Ainsi en utilisant la formule d'IPP on a:
+  \begin{eqnarray*} 
+    \mathcal{I}_n(x) &=& \int_0^x t^n \e^{-t} dt \\
+                  &=& \big[ -t^n \e^{-t} \big]_0^x - \int_0^x nt^{n-1}
+                      \times (-e^{-t})dt \\
+                  &=& x^n \e^{-x} + n \underbrace{\int_0^x t^{n-1}
+                      e^{-t}dt}_{\mathcal{I}_{n-1}(x)}    \\
+                  &=& x^n e^{-x} + n\mathcal{I}_{n-1}
+  \end{eqnarray*}
+
+  Maintenant, interessons nous à $\mathcal{J}_n(x) = \lim
+  \limits_{x\to +\infty} \mathcal{I}_n(x) $
+  \[
+    \mathcal{J}_n(x) = \lim \limits_{x\to +\infty} \mathcal{I}_n(x)
+    = \lim \limits_{x\to +\infty} (x^n e^{-x} + n\mathcal{I}_{n-1}(x))
+    = \underbrace{\lim \limits_{x\to +\infty} x^n
+      e^{-x}}_{\text{croissance comparée} = 0}
+    + \underbrace{\lim \limits_{x\to +\infty}
+      n\mathcal{I}_{n-1}(x)}_{n\mathcal{J}_{n-1}(x)}
+    = n\mathcal{J}_{n-1}(x)
+  \]
+
+  On peut donc en déduire:
+  \[
+    \mathcal{J}_n(x) =  n \mathcal{J}_{n-1}(x)
+    = n(n-1)\mathcal{J}_{n-2}(x)
+    = \dots
+    = n(n-1) \dots 2.1 \mathcal{J}_0(x)
+    = n! ~\mathcal{J}_0(x)
+  \]
+
+  Or: $\mathcal{J}_0(x) = \lim \limits_{x \to +\infty} \int_0^x t^0
+  e^{-t}dt = \lim \limits_{x \to +\infty} \int_0^x \e^{-t}dt = \lim
+  \limits_{x \to +\infty} \big[ -e^{-t} \big]_0^x = \lim \limits_{x \to +\infty}
+  -e^{-x} - (-e^0) = 0 + 1 = 1$
+
+  \vspace{1\baselineskip}
+  
+  Finalement pour tout $n \geq 1 \quad \mathcal{J}_n(x) = n!$
+\end{correction}
+\fi
+\finexo
+
+
+\exo{}
+~\\
+Calculer: 
+\[
+  \int \frac{dx}{x \ln(x) \ln(\ln(x))} 
+\]
+\finexo
+
+\newpage
+\setcounter{page}{1}
+\Closesolutionfile{mycor}
+\Readsolutionfile{mycor}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
