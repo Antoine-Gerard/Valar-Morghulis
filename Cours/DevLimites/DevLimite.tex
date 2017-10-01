@@ -175,7 +175,7 @@ limités d'ordre 2 c'est à dire:
   \]
 \item ordre 2 au voisinage de $x_0$:
   \[
-    f(x) = f(x) = f(x_0) + (x-x_0)f'(x_0) + \frac{(x-x_0)^2}{2} f''(x_0)
+    f(x) = f(x_0) + (x-x_0)f'(x_0) + \frac{(x-x_0)^2}{2} f''(x_0)
     + (x-x_0)^2 \varepsilon(x)
   \]
 \end{itemize}
@@ -218,6 +218,31 @@ limités d'ordre 2 c'est à dire:
 
 \note Il n'est pas obligé de retenir ces développements limités par
 coeur mais il faut savoir les retrouver.
+
+\subsection{Développement limité d'un produit}
+\begin{prop}
+  Soient $f$ et $g$ deux fonctions définies sur I admettant chacunes un développement
+  limité d'ordre n au voisinage de $x_0$. Pour effectuer le développement limité
+  d'ordre n de  $f \times g$ au voisinage de $x_0$, il suffit de faire le produit
+  du développement limité de $f$ par le développement limité de $g$ et de délaisser
+  tous les termes de degré strictement supérieur à n.
+\end{prop}
+
+\textbf{Exemple: } Donner le développement limité d'ordre 2 de la fonction
+$f: x \mapsto \e^x \ln(1+x)$ au voisinage de 0.
+
+On a :
+\[
+  \e^x = 1 + x + \frac{x^2}{2} + x^2\varepsilon(x) \qquad { et } \qquad
+  \ln(1+x) = x - \frac{x^2}{2} +  x^2\varepsilon(x)
+\]
+
+Effectuons le produit des deux D.L. :
+\begin{eqnarray*}
+  (1 + x + \frac{x^2}{2} + x^2\varepsilon(x))(x - \frac{x^2}{2} +  x^2\varepsilon(x))
+  &=& x - \frac{x^2}{2} + x^2 + x^2\varepsilon(x) (\color{red}{\text{ termes de deg $>2$ dans $x^2\varepsilon(x)$})} \\
+  &=& x + \frac{x^2}{2} + x^2\varepsilon(x)
+\end{eqnarray*}
 
 \subsection{Théorème des accroissements finis:}
 \begin{theo}

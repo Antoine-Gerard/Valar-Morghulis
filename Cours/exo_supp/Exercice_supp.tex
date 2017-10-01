@@ -12,7 +12,7 @@
 \usepackage{hyperref}% gestion des hyperliens
 \usepackage{answers}
 \usepackage{tikz, tkz-tab}
-%\usepackage{ntheorem}
+\usepackage{cancel}
 
 \hypersetup{pdfstartview=XYZ}% zoom par défaut
 
@@ -226,7 +226,7 @@ de $\ln(.)$ et $\exp(.)$ et en posant $n=\frac{1}{x}$.
   \]
 \item Calculer en effectuant le changement de variable  $t = \sqrt{e^x}$
   \[
-    I = \int_{0}^{\ln(3)} \frac{\e^x}{(e^x+1)\sqrt{e^x}} dx
+    I = \int_{0}^{\ln(3)} \frac{\e^x}{(\e^x+1)\sqrt{\e^x}} dx
   \]
 \item Calculer en effectuant une I.P.P.
   \[
@@ -264,14 +264,118 @@ de $\ln(.)$ et $\exp(.)$ et en posant $n=\frac{1}{x}$.
     Lorsque $x=-1$ on a $t = \arccos(-1) = \pi$ et lorsque $x=1$ on a
     $t=\arccos(1) = 0$. D'où les nouvelles bornes de l'intégrale.
     Et donc:
-    \begin{eqnarray*}
+    \begin{eqnarray*} 
       \int_{-1}^{1} \sqrt{1-x^2} dx = \int_0^{\pi} \sin^2(t) dt
       &=& \int_0^{\pi} \frac{1 - \cos(2t)}{2}dt \text{ (voir
           Indication)} \\
       &=& \frac{1}{2}\big[ t - \frac{\sin(2t)}{2} \big]_0^{\pi}\\
       &=& \frac{\pi}{2}
     \end{eqnarray*}
-  \end{questions}
+  \item $t=\sqrt{x} \Rightarrow dt = \frac{1}{2\sqrt{x}}dx \Rightarrow dx =
+    2\sqrt{x}dt$ Ainsi:
+    \[
+      \int_{1}^{4} \frac{1+\sqrt{x}}{\sqrt{x}}dx =
+      \int_{1}^{2} \frac{1+t}{\cancel{\sqrt{x}}} \underbrace{2
+        \cancel{\sqrt{x}} dt}_{dx}
+      = \int_{1}^{2} (1+t) dt
+    \]
+    
+    Lorsque $x=1$ on a $t = \sqrt{1} = 1$ et lorsque $x=4$ on a
+    $t=\sqrt{4} = 2$. D'où les nouvelles bornes de l'intégrale.
+    Et donc:
+    \begin{eqnarray*}
+      \int_{1}^4 \frac{1+\sqrt{x}}{\sqrt{x}}dx = \int_1^2 (1+t) dt
+      &=& \big[ t + \frac{t^2}{2} \big]_1^2 \\
+      &=& 2 + \frac{4}{2} - (1 + \frac{1}{2}) \\
+      &=& \frac{5}{2}
+    \end{eqnarray*}
+  \item $ t = \ln(x) \Rightarrow dt = \frac{dx}{x} \Rightarrow dx = x dt$
+    Ainsi:
+    \[
+      \int_1^{\e^1} \frac{(\ln(x))^n}{x}dx = \int_0^1 \frac{\overbrace{t^n}^{t =
+          \ln(x)}}{\cancel{x}} \underbrace{\cancel{x} dt}_{=dx}
+    \]
+
+    Lorsque $x=1$ on a $t = \ln(1) = 0$ et lorsque $x=\e^1$ on a
+    $t=\ln(\e^1) = 1$. D'où les nouvelles bornes de l'intégrale.
+    Et donc:
+    \begin{eqnarray*}
+      \int_1^{\e^1} \frac{(\ln(x))^n}{x} dx = \int_0^1 t^n dt &=& \big[
+      \frac{t^{n+1}}{n+1} \big]_0^1 \\
+      &=& \frac{1}{n+1}
+    \end{eqnarray*}
+    \item $t = \sqrt{\e^x} \Rightarrow dt = \frac{\e^x}{2\sqrt{\e^x}}
+      \Rightarrow dx = \frac{2\sqrt{\e^x}}{\e^x} dt$ Ainsi,
+      \[
+        \int_0^{\ln(3)} \frac{ \e^x }{ (\e^x+1) \sqrt{e^x} } dx =
+        \int_1^{\sqrt{3}} \frac{ \cancel{\e^x} }{ (u^2+1) \cancel{\sqrt{\e^x}} }
+        \overbrace{ 2\frac{\cancel{ \sqrt{\e^x} }}{ \cancel{\e^x} } du}_{=dx}
+      \]
+      
+      Lorsque $x=0$ on a $t = \sqrt{\e^0} = 1$ et lorsque $x=\ln(3)$ on a
+      $t=\sqrt{\e^{\ln(3)}} = \sqrt{3}$. D'où les nouvelles bornes de l'intégrale.
+      Et donc:
+      \begin{eqnarray*}
+        \int_0^{\ln(3)} \frac{ \e^x }{ (\e^x+1) \sqrt{e^x} } dx =
+        2\int_1^{\sqrt{3}} \frac{du}{1+u^2}
+        &=& 2\big[ \arctan(u) \big]_1^{\sqrt{3}} \\
+        &=& 2(\arctan(\sqrt{3}) - \arctan(1)) \\
+        &=& 2(\frac{\pi}{3} - \frac{\pi}{4}) \\
+        &=& \frac{\pi}{6}
+      \end{eqnarray*}
+    \item On pose $u(x) = x$ et $v'(x) = \sin(x)$. On a donc $u'(x) = 1$ et
+      $v(x) = -\cos(x)$. En utilisant la formule d'I.P.P. on trouve:
+      \begin{eqnarray*}
+        \int_0^{\pi} x \sin(x) dx = \big[ -x \cos(x)
+        \big]_0^{\pi} - \int_0^{\pi} (-\cos(x)) dx
+        &=& -\pi \cos(\pi)-(-0 \cos(0)) +  \underbrace{\big[ \sin(x)
+            \big]_0^{\pi}}_{=0} \\
+        &=& \pi
+      \end{eqnarray*}
+    \item On pose $u(x) = x$ et $v'(x) = \cos(x)$. On a donc $u'(x) = 1$ et
+      $v(x) = \sin(x)$. En utilisant la formule d'I.P.P. on trouve:
+      \begin{eqnarray*}
+        \int_0^{\frac{\pi}{2}} \underbrace{x \cos(x)}_{u(x)v'(x)} dx = \underbrace{\big[ x \sin(x)
+        \big]_0^{\frac{\pi}{2}}}_{[u(x)v(x)]} - \int_0^{\frac{\pi}{2}} \underbrace{(\sin(x))}_{u'(x)v(x)} dx
+        &=& \frac{\pi}{2} \sin(\frac{\pi}{2})- (0 \sin(0)) -  \big[ - \cos(x)
+            \big]_0^{\frac{\pi}{2}} \\
+        &=& \frac{\pi}{2} -1 = \frac{\pi-2}{2}
+      \end{eqnarray*}
+    \item On pose $u(x) = x^2$ et $v'(x) = \cos(x)$. On a donc $u'(x) = 2x$ et
+      $v(x) = \sin(x)$. En utilisant la formule d'I.P.P. on trouve:
+      \begin{eqnarray*}
+        \int_0^{\pi} x^2 \cos(x) dx = \underbrace{\big[ x^2 \sin(x)
+        \big]_0^{\pi}}_{=0} - 2\underbrace{ \int_0^{\pi} x \sin(x) dx}_{= \pi
+        \text{ voir Question 5} }
+        &=& 2 \pi
+      \end{eqnarray*}
+    \item On pose $u(x) = e^{x}$ et $v'(x) = \cos(x)$. On a donc $u'(x) = e^x$ et
+      $v(x) = \sin(x)$. En utilisant la formule d'I.P.P. on trouve:
+      \begin{eqnarray*}
+        \int_0^{\pi} e^x \cos(x) dx = \underbrace{ \big[ e^x \sin(x)
+        \big]_0^{\pi}}_{=0} - \int_0^{\pi} e^x \sin(x) dx
+      \end{eqnarray*}
+
+      On effectue une nouvelle I.P.P. en posant $u(x) = \e^x$ et $v'(x) =
+      \sin(x)$. On a donc $u'(x) = \e^x$ et $v(x) = -\cos(x)$. La formule
+      d'I.P.P. nous donne:
+      \begin{eqnarray*}
+        \int_0^{\pi} e^x \cos(x) dx = - \int_0^{\pi} e^x \sin(x) dx
+        &=& - \Big( \big[ -e^x \cos(x) \big]_0^{\pi} - \int_0^{\pi} \e^x (-\cos(x))
+            dx \Big)\\
+        &=&  \e^{\pi} \cos(\pi) - \e^0 \cos(0) - \int_0^{\pi} \e^x \cos(x) dx 
+      \end{eqnarray*}
+
+      Finalement, on a :
+      \[
+        \int_0^{\pi} e^x \cos(x) dx = -(\e^{\pi} + 1) - \int_0^{\pi} e^x \cos(x)
+        dx
+        \Leftrightarrow
+        2 \int_0^{\pi} e^x \cos(x) dx = -(\e^{\pi} + 1)
+        \Leftrightarrow
+        \int_0^{\pi} e^x \cos(x) dx = -\frac{(\e^{\pi} + 1)}{2}
+      \]
+    \end{questions}
 \end{correction}
 \fi
 \finexo
@@ -422,6 +526,46 @@ Calculer:
 \[
   \int \frac{dx}{x \ln(x) \ln(\ln(x))} 
 \]
+\ifprof\par
+\emph{Corrigé}\par
+\begin{correction}
+  ~\\
+  On commence par poser $u=\ln(x)$. On a donc $du=\frac{dx}{x} \Rightarrow dx =
+  x du$. Ainsi, l'intégrale devient:
+  \[
+    \int \frac{dx}{x \ln(x) \ln(\ln(x))} =
+    \int \frac{\overbrace{\cancel{x} du}^{dx = xdu}}{\cancel{x} \underbrace{u \ln(u)}_{u = \ln(x)}} 
+  \]
+  
+  Maintenant, il y a deux façon de calculer la nouvelle intégrale que l'on vient
+  de trouver. La première façon est de voir que l'intégrale est de la forme
+  $\int \frac{f'(u)}{f(u)}$ avec $f(u) = \ln(u)$. En effet, si $f(u) = \ln(u)$
+  alors $f'(u) = \frac{1}{u}$ et donc $\frac{f'(u)}{f(u)} =
+  \frac{1}{u\ln(u)}$. Ainsi la primitive de cette fonction est $\ln(|f(u)|) =
+  \ln(|\ln(u)|)$. Finalement, puisque $u=\ln(x)$, on trouve pour primitive de
+  $\frac{1}{x\ln(x) \ln(\ln(x))}$ la fonction $F(x) = \ln(|\ln(\ln(x))|)$
+
+  La deuxième façon de faire est de faire un nouveau changement de variable. On
+  pose cette fois $t=\ln(u)$. On a donc $dt=\frac{du}{u} \Rightarrow du =
+  u dt$ et l'intégrale
+  devient:
+  \[
+    \int \frac{du}{u \ln(u)} =
+   \int \frac{\overbrace{\cancel{u} dt}^{du = udt}}{\cancel{u} \underbrace{t}_{t
+       = \ln(u)}}
+   = \int \frac{dt}{t}
+ \]
+
+ On reconnait ici la dérivée de la fonction $\ln(t)$ donc
+ \[
+   \int \frac{dt}{ln(t)} = \ln(|t|)
+ \]
+
+ Ainsi, puisque $t = \ln(u)$ et $u = \ln(x)$ on arrive à $t = \ln(\ln(x))$ et:
+ \[
+    \int \frac{dx}{x \ln(x) \ln(\ln(x))} = \ln(|\ln(\ln(x))|)
+ \]
+\end{correction}
 \finexo
 
 \newpage
