@@ -1,0 +1,226 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[overload]{empheq} 
+\usepackage{lmodern}
+\usepackage{pdfpages}
+\usepackage{a4wide}
+\usepackage[showlabels,sections,floats,textmath,displaymath]{preview}
+\usepackage{hyperref}
+\usepackage{algorithm2e}
+\usepackage{fullwidth}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{bbold}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usepgfplotslibrary{fillbetween}
+\usepackage{ntheorem}
+\usepackage{eurosym}
+\usepackage{array,multirow,makecell}
+\usepackage{cancel}
+
+\def\singleletter#1{\rotatebox[origin=B]{90}{#1}}
+\makeatletter
+\def\parseletters#1{\@tfor \@tempa := #1 \do {\kern2pt\singleletter{\@tempa}}}
+\makeatother
+\def\verticaltext#1{\rotatebox[origin=c]{-90}{\catcode`\~=13\def~{\vbox to 0.33em{}}\parseletters{#1}}}
+
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\theoremstyle{break}
+\newtheorem{mydef}{Définition}[section]
+\newtheorem{theo}{Théorème}[section]
+\newtheorem*{Rem}{Remarque}
+\newtheorem*{Proof}{preuve:}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+
+\DeclareMathOperator{\divg}{div} %operateur divergence
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\e}{e} %exponentielle
+
+
+
+\newcommand{\norm}[1]{\left \Vert {#1} \right \Vert}
+\newcommand{\scal}[2]{\left\langle {#1} , {#2} \right\rangle}
+
+\newcommand{\J}[1]{\mathcal{J}(#1)}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\note}{$\bullet$ \textbf{Notes: }}
+
+\begin{document}
+\section{Équations différentielles linéaires du 1er ordre}
+
+\subsection{Définitions}
+\begin{enumerate}[label=$\bullet$, leftmargin=2cm]
+\item On appelle \emph{équation différentielle linéaire d'ordre n},
+  une relation liant une fonction dérivable à ses n dérivées d'ordre
+  inférieurs ou égale à n, de la forme:
+  \[
+    y^{(n)}(t) + a_{n-1}(t) y^{(n-1)}(t) + \dots + a_0(t) y(t) = b(t)
+    \qquad (E)
+  \]
+\item On appelle \emph{solution} de (E) sur I une fonction y dérivable qui
+  vérifie (E) sur I.
+\item On appelle \emph{solution de l'équation homogène (ou encore
+    solution de l'équation sans second membre) (E$_0$)} une solution de
+  l'équation différentielle:
+  \[
+    y^{(n)}(t) + a_{n-1}(t) y^{(n-1)}(t) + \dots + a_0(t) y(t) = 0
+    \qquad (E_0)
+  \]
+\item Résoudre sur I l'équation (E) revient à chercher l'ensemble des
+  solutions de (E)
+  sur I.
+\end{enumerate}
+
+\begin{prop}
+  Si $y_1$ et $y_2$ sont deux solutions de (E$_0$) alors, pour tout
+  $\alpha_1 \in \R$, pour tout $\alpha_2 \in \R$, $\alpha_1 y_1 +
+  \alpha_2 y_2$ est solution de $(E_0)$.
+\end{prop}
+
+\begin{prop}
+  Toute solution de (E) est la somme d'une solution de l'équation
+  homogène (E$_0$) et d'une solution particulière de (E) 
+\end{prop}
+
+\subsection{Équations différentielles linéaires du 1er ordre}
+Dans cette partie on s'intéresse à l'ensemble des solutions d'une
+équation différentielle linéaire du 1er ordre, c'est à dire qui
+s'écrit sous la forme:
+\[
+  y'(t) + a(t) y(t) = b(t) (E)
+\]
+\begin{theo}
+  L'ensemble des solutions de l'équation homogène (E$_0$) associée à (E)
+  ($y'(t) + a(t) y(t) = 0 ~ (E_0)$) est l'ensemble des fonctions y de
+  la forme:
+  \[
+    y(t) = C \e^{A(t)}
+  \]
+  où C est une constante et A une primitive de la fonction a
+\end{theo}
+
+On a vu que toute solution de (E) se composaient de la somme d'une
+solution particulière et d'une solution à l'équation homogène
+$(E_0)$. Maintenant que l'on connait les solutions de l'équation
+homogène (Théorème précédent) il nous faut calculer une solution
+particulière de (E). Une solution particulière est soit évidente, soit
+déterminée par la méthode dite \emph{de variation de la constante}.
+
+\textbf{Variation de la constante: }
+
+On suppose qu'il existe une solution particulière $y_p(t)$ de (E) de
+la forme $c(t)y_h(t)$ où $y_h$ est une solution de l'équation homogène
+(non nulle). Alors, en dérivant $c(t)y_h(t)$, et en se rappelant que
+$y_h'(t) + a(t) y_h(t) = 0$, on obtient:
+\[
+  y_p'(t) = c'(t) y_h(t) + c(t) y'_h(t) = c'(t) y_h(t) - c(t) a(t) y_h(t) 
+\]
+Puisque $y_p$ est une solution particulière de (E) on a:
+\[
+  y_p'(t) + a(t) \underbrace{y_p(t)}_{:= c(t) y_h(t)} = b(t) 
+\]
+
+Finalement on obtient:
+\[
+  \underbrace{c'(t) y_h(t) - \cancel{c(t) a(t) y_h(t)}}_{y_p'(t)}
+  + \cancel{a(t) c(t) y_h(t)} = b(t) 
+\]
+
+Ce qui nous donne donc une équation homogène pour la fonction inconnue
+c(t):
+\[
+  c'(t) y_h(t) = b(t)
+\]
+Si $y_h$ est non-nulle sur un intervalle, on cherche une primitive
+c(t) de $c'(t) = \frac{b(t)}{y_h(t)}$. Cette primitive est ensuite
+insérée dans la formule $y_p(t) = c(t) y_h(t)$ et on a trouvé une
+solution particulière de (E).
+
+\textbf{Exemple: trouver les solutions de $y'(t) = ty(t) + t$}
+
+\textbf{Recherche de la solution à l'équation homogène}
+
+L'équation homogène associée à (E) ici est:
+\[
+  y'(t) = ty(t)
+\]
+
+L'ensemble des solutions de l'équation homogènes est alors l'ensemble
+des fonctions
+\[
+  y_h(t) = C \e^{\frac{t^2}{2}}
+\]
+
+\vspace{1\baselineskip}
+
+\textbf{Variation de la constante:}
+
+On cherche une solution particulière de la forme $y_p(t) = C(t) y_h(t)
+= C(t) \e^{\frac{t}{2}^2}$. Pour trouver C(t) on doit trouver la
+solution de:
+\[
+  C'(t) \e^{\frac{t^2}{2}} = t \Rightarrow C'(t) = t\e^{-\frac{t^2}{2}}
+\]
+
+Une primitive de $t\e^{\frac{-t^2}{2}}$ étant $-\e^{\frac{-t^2}{2}}$
+on trouve une solution particulière qui est:
+\[
+  y_p(t) = C(t) \e^{\frac{t^2}{2}} = \e^{\frac{-t^2}{2}} \times
+  (-\e^{\frac{t^2}{2}}) = -1
+\]
+On aurait pu trouver cette solution particulière directement.
+
+L'ensemble des solutions de (E) est donc l'ensemble des fonctions:
+\[
+  y(t) = C\e^{\frac{t^2}{2}} - 1
+\]
+
+\subsection{Problème de Cauchy:}
+\begin{theo}{Le problème de Cauchy}
+  \[
+    \left\{
+      \begin{array}{ll}
+        y'(x)  &= a(x) y(x) \\
+        y(x_0) &= y_0
+      \end{array}
+    \right.
+  \]
+  admet une solution unique qui est $y(x) = y_0 \e^{A(x)}$ où A est
+  la primitive de a qui s'annule en $x_0$ c'est à dire:
+  \[
+    y(x) = y_0 \e^{\int_{x_0}^{x} a(t) dt}
+  \]
+\end{theo}
+
+\textbf{Exemple:}
+\[
+    \left\{
+      \begin{array}{ll}
+        y'(x)  &= xy(x) + x \\
+        y(0) &= 3
+      \end{array}
+    \right.
+  \]
+  On a déja vu que $y(x) = C\e^{\frac{x^2}{2}} - 1$. On veut donc
+  $y(0) = 3$ c'est à dire $C - 1 = 3 \Rightarrow C = 4$. Ainsi, $y(x)
+  = 4 \e^{\frac{x^2}{2}} - 1$
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
